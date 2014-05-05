@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.col-md-8 {
+  font-family: "Microsoft YaHei","Hiragino Sans GB W3",Tahoma,Arial;
+  text-shadow: 0 0 1px #EEEEEE;
+}
+
+.badge-hot {
+  background-color: #ff6666;
+}
+
+label.checkbox {
+  margin: 0;
+}
+
+.album-image {
+  overflow: hidden;
+  max-width: 580px;
+  max-height: 400px;
+  position: relative;
+  margin-bottom: 5px;
+  box-shadow: 0 0 10px 4px rgba(119, 119, 119, 0.75);
+}
+
+.album {
+  margin-bottom: 60px;
+}
+
+.songs table {
+  margin-bottom: 0;
+}
+
+.btn-group {
+  margin-bottom: 1px;
+  margin-top: 1px;
+}
+
+.login {
+  width: 600px;
+  margin: auto;
+}
+
+.cw {
+  text-align: center;
+}
+
+.playlist-name {
+  width: 300px;
+}
+
+select, .btn:focus {
+   outline-color: transparent !important;
+}
+
+#the_player {
+  z-index: 99;
+}
+
+svg text:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
