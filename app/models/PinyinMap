@@ -1,0 +1,8 @@
+<?php 
+
+class PinyinMap extends Eloquent
+{
+	public $timestamps = false;
+}
+
+
