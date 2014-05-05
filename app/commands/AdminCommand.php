@@ -89,6 +89,7 @@ class AdminCommand extends Command {
         					if ( !$song->exists || $fullRefresh ) {
         						$song->name = static::songClean($songName);
         						$song->pinyin_name = static::toPinyin($song->name);
+        						$song->lrc_lyric = null;
         						$song->save();
         						$this->info('Updated ' . $song->name);
         					}

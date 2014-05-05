@@ -78,7 +78,7 @@ class Initialize extends Migration {
 			$table->string('file_name');
 			$table->string('pinyin_name');
 			$table->integer('album_id');
-			$table->text('lrc_lyric');
+			$table->text('lrc_lyric')->nullable();
 			$table->timestamps();
 			$table->index('album_id');
 		});
