@@ -7,8 +7,8 @@
                         {{{ $song->name }}}
                     </label>
                 </td>
-                <td>{{{ $song->album->name }}}</td>
-                <td>{{{ $song->album->artist->name }}}</td>
+                <td>{{{ $song->album_name }}}</td>
+                <td>{{{ $song->artist_name }}}</td>
                 <td style="text-align:center"><button class="btn btn-default btn-xs song-play" type="button" songid="{{{$song->id }}}"><span class="glyphicon glyphicon-headphones"></span></button></td>
                 <td style="text-align:center"><button class="btn btn-default btn-xs song-add" type="button" songid="{{{$song->id }}}"><span class="glyphicon glyphicon-plus"></span></button></td>
             </tr>

@@ -11,14 +11,23 @@ class SongsController extends \BaseController {
 	{
 		$words = trim( Input::get('words', '') );
 		$songs = [];
+
 		if ($words == '') {
-			$songs = Song::with('album.artist')->orderBy('id', 'desc')->paginate(50);
+			$songs = DB::table('songs')
+					->join( 'albums', 'songs.album_id', '=', 'albums.id' )
+					->join( 'artists', 'albums.artist_id', '=', 'artists.id' )
+					->select('songs.id', 'songs.name', 'artists.name as artist_name', 'albums.name as album_name' )
+					->paginate(50);
 		} else {
-			$songs = Song::with('album.artist')
-					->where( 'pinyin_name', 'like', '%' . $words . '%' )
+			$songs = DB::table('songs')
+					->join( 'albums', 'songs.album_id', '=', 'albums.id' )
+					->join( 'artists', 'albums.artist_id', '=', 'artists.id' )
+					->where( 'songs.pinyin_name', 'like', '%' . $words . '%' )
+					->orWhere( 'albums.pinyin_name', 'like', '%' . $words . '%' )
+					->orWhere( 'artists.pinyin_name', 'like', '%' . $words . '%' )
+					->select('songs.id', 'songs.name', 'artists.name as artist_name', 'albums.name as album_name' )
 					->paginate(50);
 		}
-
 		
 		return View::make('songs.index', [ 'page' => 'songs', 'words' => $words, 'songs' => $songs ]);
 	}
