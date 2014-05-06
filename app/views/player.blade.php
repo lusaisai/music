@@ -46,10 +46,10 @@
 		</div>
 	</div>
 	<div id="userpanel">
-		<a class="btn btn-default btn-sm {{{ Auth::check() ? '' : 'disabled' }}}" id="newplaylist" title="<?php if (! Session::get( 'isLogin', false )) echo 'login and' ?> save the current playlist"   >
+		<a class="btn btn-default btn-sm {{{ Auth::check() ? '' : 'disabled' }}}" id="newplaylist" title="{{{ Auth::check() ? '' : 'login and' }}} save the current playlist"   >
 			<span class="glyphicon glyphicon-list"></span>
 		</a>
-		<a class="btn btn-default btn-sm <?php if (! Session::get( 'isLogin', false )) echo 'disabled'?>" id="downloadplaylist" title="<?php if (! Session::get( 'isLogin', false )) echo 'login and' ?> download the current playlist"   >
+		<a class="btn btn-default btn-sm {{{ Auth::check() ? '' : 'disabled' }}}" id="downloadplaylist" title="{{{ Auth::check() ? '' : 'login and' }}} download the current playlist"   >
 			<span class="glyphicon glyphicon-download"></span>
 		</a>
 		<script>$("#userpanel a").tooltip("hide");</script>

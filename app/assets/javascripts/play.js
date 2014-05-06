@@ -204,11 +204,13 @@ $(document).ready(function(){
             $("#data").load( base + pagetype + "/load", $("#searching form").serialize(), function(){
                 songListToggle();
             });
+
             return false;
         });
 
-        $("#randoms form").submit(function(){
-            $.getJSON( base + 'home/random', $("#randoms form").serialize(), play );
+        $("#main").on( 'submit', "#randoms form", function(e){
+            e.preventDefault();
+            $.getJSON( '/home/randomplay', $("#randoms form").serialize(), play );
             return false;
         });
 

@@ -13,12 +13,13 @@
 
 Route::get('/', array('uses' => 'HomeController@index'));
 Route::get('/home', array('uses' => 'HomeController@index'));
+Route::get('/home/randomplay', array('uses' => 'HomeController@randomPlay'));
 
 Route::resource('artists', 'ArtistsController');
 Route::resource('albums', 'AlbumsController');
 Route::resource('songs', 'SongsController');
 
-Route::get('/utils/songmeta/{songs}', array('uses' => 'UtilsController@songMeta'));
+Route::get('/utils/songmeta/{songids}', array('uses' => 'UtilsController@songMeta'));
 Route::get('/utils/lyric/{songid}', array('uses' => 'UtilsController@lyric'));
 Route::post('/utils/stats/{songid}', array('uses' => 'UtilsController@stats'));
 

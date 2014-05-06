@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('content')
+@section('main')
     <div id="searching">
         <form class="form-inline form-search" method="get" autocomplete="off">
             <input name="words" data-provide="typeahead" style="width:350px" type="text" class="typeahead form-control" placeholder="后来的我们">

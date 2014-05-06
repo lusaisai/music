@@ -5,12 +5,17 @@
 */
 class UtilsController extends \BaseController
 {
-	public function songMeta($songs = 0) {
+	public function songMeta($songids = 0) {
 
-	    $songs = Song::with('album.artist')->orderBy(DB::raw("field ( id, $songs )"))->findMany( explode(',', $songs) );
-	    $musicUrlPre = Config::get( "music.url" );	    
+	    $songs = Song::with('album.artist')->orderBy(DB::raw("field ( id, $songids )"))->findMany( explode(',', $songids) );
+	    
+	    return Response::json(static::songInfo($songs));
+	}
 
-	    $song_array = array();
+	public static function songInfo($songs)
+	{
+		$musicUrlPre = Config::get( "music.url" );	    
+	    $songArray = array();
 
 	    foreach ($songs as $song) {
 	    	$tmp = array();
@@ -18,10 +23,10 @@ class UtilsController extends \BaseController
 	        $tmp["title"] = $song->name;
 	        $tmp["song_info"] = "From: " . $song->album->artist->name . " - " . $song->album->name;
 	        $tmp["mp3"] = "{$musicUrlPre}/{$song->album->artist->name}/{$song->album->name}/{$song->file_name}";
-	        array_push($song_array, $tmp);
+	        array_push($songArray, $tmp);
 	    }
 
-	    return Response::json($song_array);
+	    return $songArray;
 	}
 
 	public function lyric( $songid = 0 )

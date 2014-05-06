@@ -9,7 +9,10 @@ class SongsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$songs = Song::with('album.artist')->paginate(50);
+		$words = Input::get('words', '');
+		$type = Input::get('type', 'songname');
+
+		$songs = Song::with('album.artist')->orderBy('id', 'desc')->paginate(50);
 		return View::make('songs.index', [ 'page' => 'songs', 'songs' => $songs ]);
 	}
 
