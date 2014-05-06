@@ -1,6 +1,6 @@
 <?php
 
-class SongController extends \BaseController {
+class SongsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,7 +10,7 @@ class SongController extends \BaseController {
 	public function index()
 	{
 		$songs = Song::with('album.artist')->paginate(50);
-		return View::make('songs.index', [ 'page' => 'song', 'songs' => $songs ]);
+		return View::make('songs.index', [ 'page' => 'songs', 'songs' => $songs ]);
 	}
 
 

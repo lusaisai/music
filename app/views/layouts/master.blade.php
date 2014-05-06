@@ -19,10 +19,10 @@
 <div class="container">
 	<div id="top-header">
 		<ul class="nav nav-pills">
-            <li class="{{{ $page == 'home' ? 'active' : ''}}}"><a href="{{ route('home') }}">Home</a></li>
-            <li class="{{{ $page == 'artist' ? 'active' : ''}}}"><a href="/artist">Artist</a></li>
-            <li class="{{{ $page == 'album' ? 'active' : ''}}}"><a href="/album">Album</a></li>
-            <li class="{{{ $page == 'song' ? 'active' : ''}}}"><a href="/song">Song</a></li>
+            <li class="{{{ $page == 'home' ? 'active' : ''}}}"><a href="/home">Home</a></li>
+            <li class="{{{ $page == 'artists' ? 'active' : ''}}}"><a href="/artists">Artists</a></li>
+            <li class="{{{ $page == 'albums' ? 'active' : ''}}}"><a href="/albums">Albums</a></li>
+            <li class="{{{ $page == 'songs' ? 'active' : ''}}}"><a href="/songs">Songs</a></li>
             <li class="pull-right"><a href="">User To Implement</a></li>
         </ul>
 	</div>

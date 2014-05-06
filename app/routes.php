@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
+Route::get('/', array('uses' => 'HomeController@index'));
+Route::get('/home', array('uses' => 'HomeController@index'));
 
-Route::resource('artist', 'ArtistController');
-Route::resource('album', 'AlbumController');
-Route::resource('song', 'SongController');
+Route::resource('artists', 'ArtistsController');
+Route::resource('albums', 'AlbumsController');
+Route::resource('songs', 'SongsController');
 
 Route::get('/utils/songmeta/{songs}', array('uses' => 'UtilsController@songMeta'));
 Route::get('/utils/lyric/{songid}', array('uses' => 'UtilsController@lyric'));
