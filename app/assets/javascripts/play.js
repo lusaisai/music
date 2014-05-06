@@ -150,11 +150,11 @@ $(document).ready(function(){
     };
 
     function plays(){
-        $("#data").on( 'click','.album-play', playSongs("input"));
+        $("#main").on( 'click','.album-play', playSongs("input"));
 
-        $("#data").on( 'click','.artist-play', playSongs(".in input"));
+        $("#main").on( 'click','.artist-play', playSongs(".in input"));
 
-        $("#data").on( 'click','.song-play', function(){
+        $("#main").on( 'click','.song-play', function(){
             var songID = $(this).attr('songid');
             $.getJSON( '/utils/songmeta/' + songID, play );
         });
@@ -164,45 +164,27 @@ $(document).ready(function(){
             $.getJSON( '/utils/songmeta/' + songID, play );
         });
 
-        $("#data").on( 'click','.song-add', function(){
+        $("#main").on( 'click','.song-add', function(){
             var songID = $(this).attr('songid');
             $.getJSON( '/utils/songmeta/' + songID, add);
         });
 
-        $("#data").on( 'click','.reverse-check', function(){
+        $("#main").on( 'click','.reverse-check', function(){
             $(this).closest("div.songs").find("input[type='checkbox']").each(function(){
                 $(this).prop( "checked", !$(this).prop("checked") );
             });
         });
 
-        $("#data").on( 'click','.check-all', function(){
+        $("#main").on( 'click','.check-all', function(){
             $(this).closest("div.songs").find("input[type='checkbox']").prop("checked", true);
         });
 
 
-        $("#data").on( 'click','.uncheck-all', function(){
+        $("#main").on( 'click','.uncheck-all', function(){
             $(this).closest("div.songs").find("input[type='checkbox']").prop("checked", false);
         });
 
-        $("#data").on( 'click','.data-pagination a[pageid]', function(){
-            var pageid = $(this).attr("pageid");
-            var pagetype = $("#data").attr("pagetype");
-
-            reloadGif();
-            if (history.pushState) {
-                history.pushState( 
-                    { fields: $("#searching form").serializeArray() }, 
-                    '',  
-                    base + pagetype + '?' + $("#searching form").serialize()
-                );
-            }
-            $("#data").load( base + pagetype + "/load/" + pageid, $("#searching form").serialize(), function(){
-                songListToggle();
-            });
-
-        });
-
-        $("#data").on( 'click', '.playlist-play', function () {
+        $("#main").on( 'click', '.playlist-play', function () {
             var songs = $(this).attr("songids");
             $.getJSON( '/utils/songmeta/' + songs, play );
         } )
