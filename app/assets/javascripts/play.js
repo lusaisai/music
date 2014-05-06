@@ -189,29 +189,27 @@ $(document).ready(function(){
             $.getJSON( '/utils/songmeta/' + songs, play );
         } )
 
-        $("#searching form").submit(function(e){
-            e.preventDefault();
-            var pagetype = $("#data").attr("pagetype");
-            reloadGif();
-            if (history.pushState) {
-                history.pushState( 
-                    { fields: $("#searching form").serializeArray() }, 
-                    '',  
-                    base + pagetype + "?" + $("#searching form").serialize()
-                );
-            }
+        // $("#main").on('submit', "#searching form", function(e){
+        //     e.preventDefault();
+        //     var pagetype = $("#data").attr("pagetype");
+        //     reloadGif();
+        //     if (history.pushState) {
+        //         history.pushState( 
+        //             { fields: $("#searching form").serializeArray() }, 
+        //             '',  
+        //             base + pagetype + "?" + $("#searching form").serialize()
+        //         );
+        //     }
             
-            $("#data").load( base + pagetype + "/load", $("#searching form").serialize(), function(){
-                songListToggle();
-            });
+        //     $("#data").load( base + pagetype + "/load", $("#searching form").serialize(), function(){
+        //         songListToggle();
+        //     });
 
-            return false;
-        });
+        // });
 
         $("#main").on( 'submit', "#randoms form", function(e){
             e.preventDefault();
             $.getJSON( '/home/randomplay', $("#randoms form").serialize(), play );
-            return false;
         });
 
         $(window).scroll(function() {

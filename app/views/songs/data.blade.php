@@ -24,4 +24,8 @@
     </div>
 </div>
 
-{{ $songs->links() }}
+@if ($words == '')
+    {{ $songs->links() }}
+@else
+    {{ $songs->appends(['words' => $words])->links() }}
+@endif

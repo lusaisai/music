@@ -37,7 +37,13 @@ class AdminCommand extends Command {
 	 */
 	public function fire()
 	{
-		$this->update();
+		$value = $this->option('full-refresh');
+        if ($value) {
+            $this->update(true);
+        } else {
+            $this->update();
+        }
+        
 	}
 
 	/**
@@ -127,21 +133,46 @@ class AdminCommand extends Command {
 
 	private static function toPinyin($word='')
     {
-        $pinyin = "";
-        foreach (static::mbSplit($word) as $char) {
-            $char_pinyin = DB::table('pinyin_maps')
-            				->where('chinese_word', $char)
-            				->select(DB::raw("concat_ws( '|', pinyin1,pinyin2,pinyin3,pinyin4,pinyin5,pinyin6 ) as pinyin"))
-            				->pluck('pinyin')
-            				;
+        $pinyin = [ '' ];
 
-            if ($char_pinyin == '') {
-                $char_pinyin = $char;
+        foreach (static::mbSplit($word) as $char) {
+            $map = DB::table('pinyin_maps')
+            				->where('chinese_word', $char)
+                            ->first()
+            				;
+            if (! $map) {
+
+                $pinyin = static::pinyinConcat($pinyin, [$char]);
+                continue;
             }
-            $pinyin .= '(' . preg_replace('/\|+$/', '', $char_pinyin) . ')';
+
+            $possiable_pinyins = [];
+
+            if ($map->pinyin1) {
+                $possiable_pinyins[] = $map->pinyin1;
+            }
+            if ($map->pinyin2) {
+                $possiable_pinyins[] = $map->pinyin2;
+            }
+            if ($map->pinyin3) {
+                $possiable_pinyins[] = $map->pinyin3;
+            }
+
+            $pinyin = static::pinyinConcat($pinyin, $possiable_pinyins);
         }
 
-        return $pinyin;
+        return implode(',', $pinyin);
+    }
+
+    private static function pinyinConcat($data, $append)
+    {
+        $newData = [];
+        foreach ($data as $value) {
+            foreach ($append as $addedPinyin) {
+                $newData[] = $value . $addedPinyin;
+            }
+        }
+        return $newData;
     }
 
     private static function mbSplit($word)

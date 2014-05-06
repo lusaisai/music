@@ -9,11 +9,18 @@ class SongsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$words = Input::get('words', '');
-		$type = Input::get('type', 'songname');
+		$words = trim( Input::get('words', '') );
+		$songs = [];
+		if ($words == '') {
+			$songs = Song::with('album.artist')->orderBy('id', 'desc')->paginate(50);
+		} else {
+			$songs = Song::with('album.artist')
+					->where( 'pinyin_name', 'like', '%' . $words . '%' )
+					->paginate(50);
+		}
 
-		$songs = Song::with('album.artist')->orderBy('id', 'desc')->paginate(50);
-		return View::make('songs.index', [ 'page' => 'songs', 'songs' => $songs ]);
+		
+		return View::make('songs.index', [ 'page' => 'songs', 'words' => $words, 'songs' => $songs ]);
 	}
 
 
