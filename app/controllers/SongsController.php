@@ -17,6 +17,7 @@ class SongsController extends \BaseController {
 					->join( 'albums', 'songs.album_id', '=', 'albums.id' )
 					->join( 'artists', 'albums.artist_id', '=', 'artists.id' )
 					->select('songs.id', 'songs.name', 'artists.name as artist_name', 'albums.name as album_name' )
+					->orderBy('id', 'desc')
 					->paginate(50);
 		} else {
 			$songs = DB::table('songs')

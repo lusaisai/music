@@ -2,6 +2,15 @@ $(function () {
 	var header = $('#top-header');
 	var main = $('#main');
 
+	var ajaxized = function () {
+		$.event.trigger({
+			type: "ajaxized",
+			message: "ajaxized",
+			time: new Date()
+		});
+
+	};
+
 	var headLinkRewrite = function(e){
 		e.preventDefault();
 		var link = $(this).attr('href');
@@ -9,10 +18,11 @@ $(function () {
 			var result = $('<result>').append($.parseHTML(html));
 			header.html( result.find('#top-header').html() );
 			main.html( result.find('#main').html() );
+			ajaxized();
 		});
 
 		if (history.pushState) {history.pushState('', '', link ); }
-
+		
 	};
 
 	var paginationLinkRewrite = function(e){
@@ -21,10 +31,11 @@ $(function () {
 		$.get( link, function( html ) {
 			var result = $('<result>').append($.parseHTML(html));
 			$('#data').html( result.find('#data').html() );
+			ajaxized();
 		});
 
 		if (history.pushState) {history.pushState('', '', link ); }
-
+		
 	};
 
 	var searchFormRewrite = function(e){
@@ -33,10 +44,11 @@ $(function () {
 		$.get( link, function( html ) {
 			var result = $('<result>').append($.parseHTML(html));
 			$('#data').html( result.find('#data').html() );
+			ajaxized();
 		});
 
 		if (history.pushState) {history.pushState('', '', link ); }
-
+		
 	};
 
 

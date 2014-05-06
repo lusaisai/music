@@ -187,25 +187,7 @@ $(document).ready(function(){
         $("#main").on( 'click', '.playlist-play', function () {
             var songs = $(this).attr("songids");
             $.getJSON( '/utils/songmeta/' + songs, play );
-        } )
-
-        // $("#main").on('submit', "#searching form", function(e){
-        //     e.preventDefault();
-        //     var pagetype = $("#data").attr("pagetype");
-        //     reloadGif();
-        //     if (history.pushState) {
-        //         history.pushState( 
-        //             { fields: $("#searching form").serializeArray() }, 
-        //             '',  
-        //             base + pagetype + "?" + $("#searching form").serialize()
-        //         );
-        //     }
-            
-        //     $("#data").load( base + pagetype + "/load", $("#searching form").serialize(), function(){
-        //         songListToggle();
-        //     });
-
-        // });
+        } );
 
         $("#main").on( 'submit', "#randoms form", function(e){
             e.preventDefault();
@@ -221,6 +203,11 @@ $(document).ready(function(){
         });
 
         $('.jp-shuffle').click(playlistTooltip);
+
+        $(document).on( 'ajaxized', function () {
+            // console.log("catched ajaxized");
+            songListToggle();
+        } );
     }
 
     // connect to site every interval seconds

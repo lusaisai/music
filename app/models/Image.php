@@ -13,6 +13,11 @@ class Image extends Eloquent
 	{
 		return $this->belongsTo('Artist');
 	}
+
+	public function albumUrl()
+	{
+		return Config::get('music.url') . "/{$this->album->artist->name}/{$this->album->name}/{$this->name}";
+	}
 }
 
 
