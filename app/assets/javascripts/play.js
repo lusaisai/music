@@ -205,8 +205,8 @@ $(document).ready(function(){
         $('.jp-shuffle').click(playlistTooltip);
 
         $(document).on( 'ajaxized', function () {
-            // console.log("catched ajaxized");
             songListToggle();
+            $("html, body").animate({ scrollTop: 0 });
         } );
     }
 
