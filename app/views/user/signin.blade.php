@@ -31,7 +31,9 @@
 		<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-5">
 				{{ Form::submit('Sign In', ['class'=>'btn btn-primary']); }}
+				<a href="/signup"> Need an account? Sign Up Here</a>
 			</div>
 		</div>
+		
 	{{ Form::close() }}
 @stop

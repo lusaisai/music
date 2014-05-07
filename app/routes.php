@@ -19,15 +19,29 @@ Route::get('/home/popularsongs/{user}/{timeline}', array('uses' => 'HomeControll
 Route::resource('artists', 'ArtistsController');
 Route::resource('albums', 'AlbumsController');
 Route::resource('songs', 'SongsController');
-Route::resource('users', 'UsersController');
 
 Route::get('/utils/songmeta/{songids}', array('uses' => 'UtilsController@songMeta'));
 Route::get('/utils/lyric/{songid}', array('uses' => 'UtilsController@lyric'));
 Route::post('/utils/stats/{songid}', array('uses' => 'UtilsController@stats'));
 
-Route::get( '/signin', array('uses' => 'UsersController@index') );
-Route::post( '/signin', array('uses' => 'UsersController@signin') );
-Route::get( '/signout', array('uses' => 'UsersController@signout') );
 
+
+
+// User
+
+Route::get( '/signup', array('uses' => 'UserController@create') );
+Route::post( '/signup', array('uses' => 'UserController@store') );
+
+Route::get( '/signin', array('uses' => 'UserController@index') );
+Route::post( '/signin', array('uses' => 'UserController@signin') );
+Route::get('/signout', array('before' => 'auth', 'uses' => 'UserController@signout'));
+
+Route::get('/user', array('before' => 'auth', 'uses' => 'UserController@show'));
+
+Route::get('/user/editusername', array('before' => 'auth', 'uses' => 'UserController@editusername'));
+Route::post('/user/updateusername', array('before' => 'auth', 'uses' => 'UserController@updateusername'));
+
+Route::get('/user/editpassword', array('before' => 'auth', 'uses' => 'UserController@editpassword'));
+Route::post('/user/updatepassword', array('before' => 'auth', 'uses' => 'UserController@updatepassword'));
 
 

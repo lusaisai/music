@@ -8,7 +8,7 @@
 			@endforeach
 		</div>
 	@endif
-	{{ Form::model(Auth::user(), [ 'url' => '/users/' . Auth::user()->id , 'method' => 'PUT', 'role' => 'form', 'class' => 'form-horizontal', 'autocomplete' => 'off' ] ) }}
+	{{ Form::model(Auth::user(), [ 'url' => '/user/updateusername' , 'role' => 'form', 'class' => 'form-horizontal', 'autocomplete' => 'off' ] ) }}
 	<div class="form-group">
 		{{ Form::label('username', 'Username', array('class' => 'col-sm-3 control-label')) }}
 		<div class="col-sm-5">

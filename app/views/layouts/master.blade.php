@@ -9,7 +9,6 @@
 
 	<?= stylesheet_link_tag() ?>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<?= javascript_include_tag() ?>
 </head>
 <body>
@@ -24,13 +23,14 @@
             @if ( !Auth::check() )
             	<li class="pull-right {{{ $page == 'users' ? 'active' : ''}}}"><a data-remote="true" href="/signin">Sign In</a></li>
             @else
-            	<li class="pull-right dropdown {{{ $page == 'users' ? 'active' : ''}}}">
+            	<li class="pull-right dropdown {{{ $page == 'user' ? 'active' : ''}}}">
 	            	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	            	    {{{ Auth::user()->username }}} <span class="caret"></span>
 	            	</a>
 	            	<ul class="dropdown-menu">
 	            		<li class="divider"></li>
-	            		<li><a data-remote="true" href="/users/{{{ Auth::user()->id }}}/edit">Change Username</a></li>
+	            		<li><a data-remote="true" href="/user/editusername">Change Username</a></li>
+	            		<li><a data-remote="true" href="/user/editpassword">Change Password</a></li>
 	            		<li><a data-remote="true" href="/signout">Sign Out</a></li>
 	            	</ul>
             	</li>

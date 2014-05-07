@@ -8,7 +8,7 @@
 			@endforeach
 		</div>
 	@endif
-	{{ Form::open(array('url' => '/users', 'role' => 'form', 'class' => 'form-horizontal', 'autocomplete' => 'off')) }}
+	{{ Form::open(array('url' => '/signup', 'role' => 'form', 'class' => 'form-horizontal', 'autocomplete' => 'off')) }}
 		<div class="form-group">
 			{{ Form::label('email', 'Email', array('class' => 'col-sm-3 control-label')) }}
 			<div class="col-sm-5">
