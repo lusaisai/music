@@ -79,7 +79,7 @@
       .attr("width", 800)
       .attr("height", 600)
       .append("g")
-      .attr("transform", "translate(400,250)")
+      .attr("transform", "translate(400,280)")
       .selectAll("text")
       .data(words)
       .enter()

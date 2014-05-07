@@ -79,7 +79,7 @@ class HomeController extends BaseController {
 		}
 		$query .= " group by 1,2
 		order by cnt desc
-		limit 30
+		limit 50
 		";
 		return DB::select($query);
 	}
