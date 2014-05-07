@@ -26,6 +26,9 @@ class SongsController extends \BaseController {
 					->where( 'songs.pinyin_name', 'like', '%' . $words . '%' )
 					->orWhere( 'albums.pinyin_name', 'like', '%' . $words . '%' )
 					->orWhere( 'artists.pinyin_name', 'like', '%' . $words . '%' )
+					->orWhere( 'songs.name', 'like', '%' . $words . '%' )
+					->orWhere( 'albums.name', 'like', '%' . $words . '%' )
+					->orWhere( 'artists.name', 'like', '%' . $words . '%' )
 					->select('songs.id', 'songs.name', 'artists.name as artist_name', 'albums.name as album_name' )
 					->paginate(50);
 		}

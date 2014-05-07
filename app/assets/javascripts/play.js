@@ -23,7 +23,7 @@ $(document).ready(function(){
 
         var currentTime = event.jPlayer.status.currentTime;
 
-        if ( currentSongId !== localStorage.getItem('currentsongid') ) {
+        if ( currentSongId != 0 && currentSongId !== localStorage.getItem('currentsongid') ) {
             $.get('/utils/lyric/' + currentSongId, function(data) {
                 lrc.setLrc(data);
                 lrc.move(currentTime);

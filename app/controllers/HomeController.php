@@ -9,10 +9,37 @@ class HomeController extends BaseController {
 
 	public function randomPlay()
 	{
-		$songs = Song::with('album.artist')->orderByRaw('rand()')->limit(15)->get();
+		$words = trim( Input::get('words', '') );
+		$words = preg_replace('!\s+!', ' ', $words);
+		$type = trim( Input::get('type', 'artist-name') );
 
-		
-		return Response::json(UtilsController::songInfo($songs));
+		$songs = DB::table('songs')
+					->join( 'albums', 'songs.album_id', '=', 'albums.id' )
+					->join( 'artists', 'albums.artist_id', '=', 'artists.id' )
+					;
+
+		if ( $words == '' ) {
+		} elseif ( $type == 'artist-name' ) {
+			foreach ( explode(' ', $words) as $word ) {
+				$songs->orWhere( 'artists.pinyin_name', 'like', '%' . $word . '%' );
+				$songs->orWhere( 'artists.name', 'like', '%' . $word . '%' );
+			}
+		} elseif ( $type == 'album-name' ) {
+			$songs->orWhere( 'albums.pinyin_name', 'like', '%' . $words . '%' );
+			$songs->orWhere( 'albums.name', 'like', '%' . $words . '%' );
+		} elseif ( $type == 'song-name' ) {
+			$songs->orWhere( 'songs.pinyin_name', 'like', '%' . $words . '%' );
+			$songs->orWhere( 'songs.name', 'like', '%' . $words . '%' );
+		}
+
+		$songs = $songs->select('songs.id')->orderByRaw('rand()')->limit(15)->get();
+
+		$ids  = [];
+		foreach ($songs as $song) {
+			$ids[] = $song->id;
+		}
+
+		return Response::json(UtilsController::songInfo(Song::with('album.artist')->findMany($ids)));
 	}
 
 	public function popularSongs( $user = "all", $time = "all")

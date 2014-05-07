@@ -18,7 +18,6 @@ $(function () {
 			var result = $('<result>').append($.parseHTML(html, true));
 			header.html( result.find('#top-header').html() );
 			main.html( result.find('#main').html() );
-			console.log(result.find('#main').html());
 			ajaxized();
 		});
 

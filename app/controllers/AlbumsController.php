@@ -23,6 +23,8 @@ class AlbumsController extends \BaseController {
 					->join( 'artists', 'albums.artist_id', '=', 'artists.id' )
 					->where( 'albums.pinyin_name', 'like', '%' . $words . '%' )
 					->orWhere( 'artists.pinyin_name', 'like', '%' . $words . '%' )
+					->orWhere( 'albums.name', 'like', '%' . $words . '%' )
+					->orWhere( 'artists.name', 'like', '%' . $words . '%' )
 					->select('albums.id', 'albums.name', 'artists.name as artist_name' )
 					->paginate(5);
 		}

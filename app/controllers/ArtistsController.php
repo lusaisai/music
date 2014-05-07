@@ -19,6 +19,7 @@ class ArtistsController extends \BaseController {
 		} else {
 			$artists = Artist::with('albums.songs', 'images')
 					->where( 'artists.pinyin_name', 'like', '%' . $words . '%' )
+					->orWhere( 'artists.name', 'like', '%' . $words . '%' )
 					->orderBy('id', 'desc')
 					->paginate(5);
 		}
