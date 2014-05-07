@@ -13,9 +13,9 @@ class PlaylistsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$playlists = Playlist::all();
+		$playlists = Playlist::where('user_id', '=', Auth::user()->id )->paginate(10);
 
-		return View::make('playlists.index', compact('playlists'));
+		return View::make('playlists.index', [ 'page' => 'user', 'playlists' => $playlists ]);
 	}
 
 	/**
@@ -114,7 +114,7 @@ class PlaylistsController extends \BaseController {
 	{
 		Playlist::destroy($id);
 
-		return Redirect::route('playlists.index');
+		return Response::make('');
 	}
 
 }

@@ -10,4 +10,10 @@ class Playlist extends \Eloquent {
 		$this->belongsTo('User');
 	}
 
+	public function songs()
+	{
+		$song_ids = explode(',', $this->song_ids);
+		return Song::with('album.artist')->findMany($song_ids)->all();
+	}
+
 }
