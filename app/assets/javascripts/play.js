@@ -159,7 +159,7 @@ $(document).ready(function(){
             $.getJSON( '/utils/songmeta/' + songID, play );
         });
 
-        $("#top-song-cloud").on( 'click','text', function(){
+        $("#main").on( 'click','#top-song-cloud text', function(){
             var songID = $(this).attr('song-id');
             $.getJSON( '/utils/songmeta/' + songID, play );
         });
