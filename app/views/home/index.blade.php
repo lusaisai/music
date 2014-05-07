@@ -14,7 +14,7 @@
 	</form>
 </div>
 <div id="popular-songs" class="tops">
-<h3>Top Songs</h3>
+<h3>Popular Songs</h3>
 
 <div class="timeline btn-group" data-toggle="buttons">
   <label time="week" class="btn btn-primary">
