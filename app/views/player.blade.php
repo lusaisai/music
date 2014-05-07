@@ -49,9 +49,6 @@
 		<a class="btn btn-default btn-sm {{{ Auth::check() ? '' : 'disabled' }}}" id="newplaylist" title="{{{ Auth::check() ? '' : 'login and' }}} save the current playlist"   >
 			<span class="glyphicon glyphicon-list"></span>
 		</a>
-		<a class="btn btn-default btn-sm {{{ Auth::check() ? '' : 'disabled' }}}" id="downloadplaylist" title="{{{ Auth::check() ? '' : 'login and' }}} download the current playlist"   >
-			<span class="glyphicon glyphicon-download"></span>
-		</a>
 		<script>$("#userpanel a").tooltip("hide");</script>
 	</div>
 	<div id="lyricer"></div>
@@ -69,17 +66,15 @@
 	$('#newplaylist').click(function(event) {
 		bootbox.prompt("Please enter the playlist name", function(playlistName) {                
 			if (playlistName !== null && $.trim(playlistName) !== "" ) {
-		        $.get('/user/saveplaylist/' + gatherList() + "/" + playlistName, function(data) {
-		        	bootbox.alert("Playlist saved");
-		        }).fail( function() {
-		        	bootbox.alert("Failed to save the playlist, please try later");
-		        });
+				$.post( "/playlists", { name: playlistName, song_ids: gatherList() })
+				.done(function() {
+					bootbox.alert('<div class="alert alert-success">Playlist saved</div>');
+				})
+				.fail(function(data) {
+					bootbox.alert( '<div class="alert alert-danger">' + data.responseText + '</div>');
+				});
 			}
 		});
-	});
-
-	$('#downloadplaylist').click(function(){
-		window.location = '/playutils/download/' + gatherList();
 	});
 })();	
 

@@ -28,6 +28,7 @@
 	            	    {{{ Auth::user()->username }}} <span class="caret"></span>
 	            	</a>
 	            	<ul class="dropdown-menu">
+	            		<li><a data-remote="true" href="/playlists">Playlists</a></li>
 	            		<li class="divider"></li>
 	            		<li><a data-remote="true" href="/user/editusername">Change Username</a></li>
 	            		<li><a data-remote="true" href="/user/editpassword">Change Password</a></li>

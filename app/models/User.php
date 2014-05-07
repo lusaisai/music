@@ -13,6 +13,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $guarded = array('id', 'password');
 
+	public function playlists()
+	{
+		return $this->hasMany('Playlist');
+	}
+
 	/**
 	 * The database table used by the model.
 	 *

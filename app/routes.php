@@ -16,19 +16,16 @@ Route::get('/home', array('uses' => 'HomeController@index'));
 Route::get('/home/randomplay', array('uses' => 'HomeController@randomPlay'));
 Route::get('/home/popularsongs/{user}/{timeline}', array('uses' => 'HomeController@popularSongs'));
 
-Route::resource('artists', 'ArtistsController');
-Route::resource('albums', 'AlbumsController');
-Route::resource('songs', 'SongsController');
+Route::resource('artists', 'ArtistsController', [ 'only' => ['index'] ]);
+Route::resource('albums', 'AlbumsController', [ 'only' => ['index'] ]);
+Route::resource('songs', 'SongsController', [ 'only' => ['index'] ]);
+Route::resource('playlists', 'PlaylistsController');
 
 Route::get('/utils/songmeta/{songids}', array('uses' => 'UtilsController@songMeta'));
 Route::get('/utils/lyric/{songid}', array('uses' => 'UtilsController@lyric'));
 Route::post('/utils/stats/{songid}', array('uses' => 'UtilsController@stats'));
 
-
-
-
 // User
-
 Route::get( '/signup', array('uses' => 'UserController@create') );
 Route::post( '/signup', array('uses' => 'UserController@store') );
 
@@ -43,5 +40,4 @@ Route::post('/user/updateusername', array('before' => 'auth', 'uses' => 'UserCon
 
 Route::get('/user/editpassword', array('before' => 'auth', 'uses' => 'UserController@editpassword'));
 Route::post('/user/updatepassword', array('before' => 'auth', 'uses' => 'UserController@updatepassword'));
-
 

@@ -1,0 +1,1 @@
+/var/www/html/music/app/views/playlists/index.blade.php
