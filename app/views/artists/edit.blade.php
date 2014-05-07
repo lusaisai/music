@@ -1,0 +1,1 @@
+/var/www/html/music/app/views/artists/edit.blade.php

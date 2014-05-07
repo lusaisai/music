@@ -18,6 +18,11 @@ class Image extends Eloquent
 	{
 		return Config::get('music.url') . "/{$this->album->artist->name}/{$this->album->name}/{$this->name}";
 	}
+
+	public function artistUrl()
+	{
+		return Config::get('music.url') . "/{$this->artist->name}/{$this->name}";
+	}
 }
 
 

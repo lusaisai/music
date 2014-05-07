@@ -7,11 +7,9 @@
     
 	<title>{{{ Poem::orderBy(DB::raw('rand()'))->pluck('content') }}}</title>
 
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<?= stylesheet_link_tag() ?>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<?= javascript_include_tag() ?>
 </head>
 <body>
