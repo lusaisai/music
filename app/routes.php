@@ -25,7 +25,9 @@ Route::get('/utils/songmeta/{songids}', array('uses' => 'UtilsController@songMet
 Route::get('/utils/lyric/{songid}', array('uses' => 'UtilsController@lyric'));
 Route::post('/utils/stats/{songid}', array('uses' => 'UtilsController@stats'));
 
-Route::get( '/users/signin', array('uses' => 'UsersController@signin') );
+Route::get( '/signin', array('uses' => 'UsersController@index') );
+Route::post( '/signin', array('uses' => 'UsersController@signin') );
+Route::get( '/signout', array('uses' => 'UsersController@signout') );
 
 
 

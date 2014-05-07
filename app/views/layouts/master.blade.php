@@ -16,11 +16,27 @@
 <div class="container">
 	<div id="top-header">
 		<ul class="nav nav-pills">
-            <li class="{{{ $page == 'home' ? 'active' : ''}}}"><a href="/home">Home</a></li>
-            <li class="{{{ $page == 'artists' ? 'active' : ''}}}"><a href="/artists">Artists</a></li>
-            <li class="{{{ $page == 'albums' ? 'active' : ''}}}"><a href="/albums">Albums</a></li>
-            <li class="{{{ $page == 'songs' ? 'active' : ''}}}"><a href="/songs">Songs</a></li>
-            <li class="pull-right"><a href="">User To Implement</a></li>
+            <li class="{{{ $page == 'home' ? 'active' : ''}}}"><a data-remote="true" href="/home">Home</a></li>
+            <li class="{{{ $page == 'artists' ? 'active' : ''}}}"><a data-remote="true" href="/artists">Artists</a></li>
+            <li class="{{{ $page == 'albums' ? 'active' : ''}}}"><a data-remote="true" href="/albums">Albums</a></li>
+            <li class="{{{ $page == 'songs' ? 'active' : ''}}}"><a data-remote="true" href="/songs">Songs</a></li>
+
+            @if ( !Auth::check() )
+            	<li class="pull-right {{{ $page == 'users' ? 'active' : ''}}}"><a data-remote="true" href="/signin">Sign In</a></li>
+            @else
+            	<li class="pull-right dropdown {{{ $page == 'users' ? 'active' : ''}}}">
+	            	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	            	    {{{ Auth::user()->username }}} <span class="caret"></span>
+	            	</a>
+	            	<ul class="dropdown-menu">
+	            		<li class="divider"></li>
+	            		<li><a data-remote="true" href="/users/{{{ Auth::user()->id }}}/edit">Change Username</a></li>
+	            		<li><a data-remote="true" href="/signout">Sign Out</a></li>
+	            	</ul>
+            	</li>
+            @endif
+
+            
         </ul>
 	</div>
 	<div class="row">

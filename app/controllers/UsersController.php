@@ -4,21 +4,30 @@ class UsersController extends \BaseController {
 
 	public function index()
 	{
-		if (!Auth::check()) {
-			# code...
+		if (Auth::check()) {
+			return Redirect::to('/users/'.Auth::user()->id);
 		}
 
-		return View::make('users.index', compact('users'));
+		return View::make('users.signin', [ 'page' => 'users' ] );
 	}
 
-	/**
-	 * Show the form for creating a new user
-	 *
-	 * @return Response
-	 */
 	public function signin()
 	{
-		return View::make('users.signin', [ 'page' => 'users' ] );
+		if (Auth::attempt(array('email' => Input::get('email', ''), 'password' => Input::get('password', '')), Input::get('rememberme', false))){
+		    return Redirect::to('/users/'.Auth::user()->id);
+		} else {
+			return Redirect::back()->withInput()->with('error', 'Wrong username/password');
+		}
+	}
+
+	public function signout()
+	{
+		if (Auth::check()) {
+			Auth::logout();
+		}
+
+		return Redirect::to('/users');
+
 	}
 
 	/**
@@ -51,7 +60,9 @@ class UsersController extends \BaseController {
 		$user->password = Hash::make( Input::get('password') );
 		$user->save();
 
-		return Redirect::to('/users/login');
+		Auth::login($user);
+
+		return Redirect::to('/users');
 	}
 
 	/**
@@ -62,9 +73,7 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$user = User::findOrFail($id);
-
-		return View::make('users.show', compact('user'));
+		return View::make('users.show', [ 'page' => 'users' ] );
 	}
 
 	/**
@@ -75,9 +84,7 @@ class UsersController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$user = User::find($id);
-
-		return View::make('users.edit', compact('user'));
+		return View::make('users.edit', [ 'page' => 'users' ] );
 	}
 
 	/**
@@ -88,12 +95,16 @@ class UsersController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$user = User::findOrFail($id);
+		// $user = User::findOrFail($id);
+		$user = Auth::user();
 
-		$validator = Validator::make($data = Input::all(), User::$rules);
+		$rules = [ 
+			'username' => 'required|unique:users'
+		];
 
-		if ($validator->fails())
-		{
+		$validator = Validator::make($data = Input::all(), $rules);
+
+		if ($validator->fails()) {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 

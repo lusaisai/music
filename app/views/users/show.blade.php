@@ -1,1 +1,5 @@
-/var/www/html/music/app/views/users/show.blade.php
+@extends('layouts.master')
+
+@section('main')
+	Hi, {{ Auth::user()->username }}
+@stop

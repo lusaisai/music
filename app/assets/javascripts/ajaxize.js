@@ -53,7 +53,7 @@ $(function () {
 
 
 
-	header.on( 'click', 'a', headLinkRewrite );
+	header.on( 'click', 'a[data-remote="true"]', headLinkRewrite );
 	main.on( 'click', '.pagination a', paginationLinkRewrite );
 	main.on( 'submit', "#searching form", searchFormRewrite );
 });
