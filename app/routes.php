@@ -14,6 +14,7 @@
 Route::get('/', array('uses' => 'HomeController@index'));
 Route::get('/home', array('uses' => 'HomeController@index'));
 Route::get('/home/randomplay', array('uses' => 'HomeController@randomPlay'));
+Route::get('/home/popularsongs/{user}/{timeline}', array('uses' => 'HomeController@popularSongs'));
 
 Route::resource('artists', 'ArtistsController');
 Route::resource('albums', 'AlbumsController');

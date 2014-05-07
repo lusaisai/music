@@ -15,9 +15,10 @@ $(function () {
 		e.preventDefault();
 		var link = $(this).attr('href');
 		$.get( link, function( html ) {
-			var result = $('<result>').append($.parseHTML(html));
+			var result = $('<result>').append($.parseHTML(html, true));
 			header.html( result.find('#top-header').html() );
 			main.html( result.find('#main').html() );
+			console.log(result.find('#main').html());
 			ajaxized();
 		});
 
