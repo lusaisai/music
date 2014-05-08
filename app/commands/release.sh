@@ -23,6 +23,7 @@ rm -rf $TARGET_DIR/app/storage/cache/*
 rm -rf $TARGET_DIR/app/storage/logs/*
 rm -rf $TARGET_DIR/app/storage/sessions/*
 rm -rf $TARGET_DIR/app/storage/views/*
+rm -rf $TARGET_DIR/app/LyricSearch
 
 cd $TARGET_DIR/..
 tar -zcvf $TARGET_ZIP `basename $TARGET_DIR`
