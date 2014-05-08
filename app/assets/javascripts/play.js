@@ -12,13 +12,17 @@ $(document).ready(function(){
     var buffer = function (event) {
         var audio = document.getElementById('jp_audio_0');
 
-        if (!audio.buffered.length) { return; }
+        if (!audio.buffered.length) { 
+            setBufferWidth(0);
+        } else {
+            var duration = event.jPlayer.status.duration;
+            var playtime = event.jPlayer.status.currentTime;
+            var buffertime = audio.buffered.end(audio.buffered.length-1);
 
-        var duration = event.jPlayer.status.duration;
-        var playtime = event.jPlayer.status.currentTime;
-        var buffertime = audio.buffered.end(audio.buffered.length-1);
+            setBufferWidth( (Math.floor(buffertime) - playtime) / duration);
+        }
 
-        setBufferWidth( (Math.floor(buffertime) - playtime) / duration);
+        
     };
 
     var doWhenTimeUpdates = function(event) {
