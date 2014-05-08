@@ -19,7 +19,7 @@ $(document).ready(function(){
             var playtime = event.jPlayer.status.currentTime;
             var buffertime = audio.buffered.end(audio.buffered.length-1);
 
-            setBufferWidth( (Math.floor(buffertime) - playtime) / duration);
+            setBufferWidth( (buffertime - playtime - 0.5) / duration); // 0.5, tmp solution to not exceed 100%
         }
 
         
