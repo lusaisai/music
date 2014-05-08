@@ -43,11 +43,13 @@
 <script>
 (function() {
   var fetchData = function(user, time) {
+    $('#top-song-cloud').fadeOut();
     $.ajax({
       dataType: "json",
       url: "/home/popularsongs/" + user + "/" + time,
       success: function( data, textStatus, jqXHR) {
         setCloud(data);
+        $('#top-song-cloud').fadeIn();
       }
     });
   };
@@ -79,7 +81,7 @@
       .attr("width", 800)
       .attr("height", 600)
       .append("g")
-      .attr("transform", "translate(400,280)")
+      .attr("transform", "translate(400,300)")
       .selectAll("text")
       .data(words)
       .enter()
