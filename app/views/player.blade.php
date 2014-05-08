@@ -27,6 +27,7 @@
 				<div class="jp-progress">
 					<div class="jp-seek-bar progress">
 						<div class="jp-play-bar progress-bar"></div>
+						<div class="jp-buffer-bar progress-bar" style="width: 0%"></div>
 					</div>
 				</div>
 				<div id="time">

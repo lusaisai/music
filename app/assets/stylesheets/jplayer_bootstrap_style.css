@@ -81,3 +81,8 @@ font: 'MisoRegular';
 .jp-volume-max,.jp-repeat-off,.jp-repeat {
   float: right;
 }
+
+.jp-buffer-bar {
+  box-shadow: none;
+  opacity: 0.66;
+}

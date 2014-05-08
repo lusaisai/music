@@ -5,7 +5,25 @@ $(document).ready(function(){
     var playerY = 40;
     var lrc = new Lyricer();
 
+    var setBufferWidth = function(width) {
+            $('.jp-buffer-bar').attr('style',  'width: ' + (width * 100) + '%' );
+        };
+
+    var buffer = function (event) {
+        var audio = document.getElementById('jp_audio_0');
+
+        if (!audio.buffered.length) { return; }
+
+        var duration = event.jPlayer.status.duration;
+        var playtime = event.jPlayer.status.currentTime;
+        var buffertime = audio.buffered.end(audio.buffered.length-1);
+
+        setBufferWidth( (Math.floor(buffertime) - playtime) / duration);
+    };
+
     var doWhenTimeUpdates = function(event) {
+        buffer(event);
+
         var songs = [];
         var currentSong = 0;
         var currentSongId = 0;
@@ -36,6 +54,8 @@ $(document).ready(function(){
         localStorage.setItem('currentsong', currentSong);
         localStorage.setItem('currentsongid', currentSongId);
         localStorage.setItem('currenttime', currentTime);
+
+
     };
 
     var storePlayStatus = function (status) {
@@ -96,6 +116,7 @@ $(document).ready(function(){
         window.mPlayList = myPlaylist; // exposed to window object for other javascripts to use
     };
 
+    
 
     myPlaylist = new jPlayerPlaylist(
             {
@@ -114,7 +135,8 @@ $(document).ready(function(){
                     autoPlay: false,
                     enableRemoveControls: true
                 },
-                ready: readPlayStatus
+                ready: readPlayStatus,
+                progress: buffer
             }
     );
 
