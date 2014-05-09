@@ -10,10 +10,10 @@
 					<li><a href="javascript:;" class="jp-pause btn btn-default btn-sm" tabindex="1"><span class="glyphicon glyphicon-pause"></span></a></li>
 					<li><a href="javascript:;" class="jp-next btn btn-default btn-sm" tabindex="1"><span class="glyphicon glyphicon-forward"></span></a></li>
 					<li><a href="javascript:;" class="jp-stop btn btn-default btn-sm" tabindex="1"><span class="glyphicon glyphicon-stop"></span></a></li>
-					<li><a href="javascript:;" class="jp-shuffle btn btn-default btn-sm" tabindex="1" title="shuffle the playlist"><span class="glyphicon glyphicon-random"></span></a></li>
-					<li><a href="javascript:;" class="jp-shuffle-off btn btn-default btn-sm" tabindex="1" title="shuffle the playlist"><span class=" glyphicon glyphicon-random"></span></a></li>
-					<li><a href="javascript:;" class="jp-repeat btn btn-default btn-sm" tabindex="1" title="repeat"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
-					<li><a href="javascript:;" class="jp-repeat-off btn btn-default btn-sm" tabindex="1" title="repeat off"><span class="glyphicon glyphicon-repeat"></span></a></li>
+					<li><a href="javascript:;" class="jp-shuffle btn btn-default btn-sm" tabindex="1" title="Click to shuffle the playlist"><span class="glyphicon glyphicon-random"></span></a></li>
+					<li><a href="javascript:;" class="jp-shuffle-off btn btn-default btn-sm" tabindex="1" title="Click to shuffle the playlist"><span class=" glyphicon glyphicon-random"></span></a></li>
+					<li><a href="javascript:;" class="jp-repeat btn btn-default btn-sm" tabindex="1" title="In Order"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+					<li><a href="javascript:;" class="jp-repeat-off btn btn-default btn-sm" tabindex="1" title="Repeat"><span class="glyphicon glyphicon-repeat"></span></a></li>
 					<br/>
 					<li><a href="javascript:;" class="jp-mute btn btn-default btn-sm" tabindex="1" title="mute"><span class="glyphicon glyphicon-volume-off"></span></a></li>
 					<li><a href="javascript:;" class="jp-unmute btn btn-default btn-sm" tabindex="1" title="unmute"><span class="glyphicon glyphicon-volume-down"></span></a></li>
