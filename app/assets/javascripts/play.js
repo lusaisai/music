@@ -6,7 +6,7 @@ $(document).ready(function(){
     var lrc = new Lyricer();
 
     var setBufferWidth = function(width) {
-            $('.jp-buffer-bar').attr('style',  'width: ' + (width * 100) + '%' );
+            $('.jp-buffer-bar').attr('style',  'width: ' + width + '%' );
         };
 
     var buffer = function (event) {
@@ -19,7 +19,11 @@ $(document).ready(function(){
             var playtime = event.jPlayer.status.currentTime;
             var buffertime = audio.buffered.end(audio.buffered.length-1);
 
-            setBufferWidth( (buffertime - playtime - 0.5) / duration); // 0.5, tmp solution to not exceed 100%
+            if ( Math.floor(duration) == Math.floor(buffertime) ) {
+                setBufferWidth(100 - event.jPlayer.status.currentPercentRelative);
+            } else {
+                setBufferWidth( (buffertime - playtime) * 100 / duration);
+            }
         }
 
         
@@ -131,7 +135,7 @@ $(document).ready(function(){
                 supplied: "m4a, mp3",
                 swfPath: "/assets/jplayer/js",
                 solution: 'html, flash',
-                smoothPlayBar: true,
+                smoothPlayBar: false,
                 keyEnabled: true,
                 volume: 0.88,
                 preload: "auto",
