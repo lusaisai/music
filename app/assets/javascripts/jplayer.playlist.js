@@ -403,13 +403,33 @@
 			}
 		},
 		play: function(index) {
+			var that = this;
+
+			var reBufferPlay = function () {
+				var audio = document.getElementById('jp_audio_0');
+				if ( !audio.buffered.length ) {
+					that.select(index);
+					setTimeout( reBufferPlay, 3000 );
+				} else {
+					var buffertime = audio.buffered.end(audio.buffered.length-1);
+					if ( buffertime < 10 ) {
+						that.select(index);
+						setTimeout( reBufferPlay, 3000 );
+					} else {
+						$(that.cssSelector.jPlayer).jPlayer("play");
+					}
+				}
+			};
+
+
 			var oldsongid = $('.jp-playlist-current').attr("songid");
 
 			index = (index < 0) ? this.original.length + index : index; // Negative index relates to end of array.
 			if(0 <= index && index < this.playlist.length) {
 				if(this.playlist.length) {
 					this.select(index);
-					$(this.cssSelector.jPlayer).jPlayer("play");
+					// $(this.cssSelector.jPlayer).jPlayer("play");
+					setTimeout( reBufferPlay, 5000 );
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");
