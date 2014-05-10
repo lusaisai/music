@@ -91,6 +91,9 @@ public class DBTalker {
                 if( lrcLyric.equals("") ) {
                     lrcLyric = lLrc.findLrcLyric(song.artist, song.name);
                 }
+                if( lrcLyric.equals("") ) {
+                    lrcLyric = lLrc.findLrcLyric("", song.name);
+                }
                 ps.setString(1,lrcLyric);
                 ps.setInt(2,song.id);
                 ps.executeUpdate();
