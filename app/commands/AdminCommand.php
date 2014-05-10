@@ -55,10 +55,13 @@ class AdminCommand extends Command {
 	{
 		$this->comment('This may take a whike, please wait ...');
 		$musicDir = Config::get( "music.dir" );
-		$musicHandle = opendir($musicDir);
+
+        DB::beginTransaction();
+
 		chdir($musicDir);
-		DB::beginTransaction();
-		while (false !== ($artistName = readdir($musicHandle))) {
+        $artists = scandir('.');
+        natsort($artists);
+        foreach ($artists as $artistName) {
 			// artists
         	if ( $artistName == "." || $artistName == ".." || ! is_dir($artistName) ) continue;
         	$artist = Artist::firstOrNew( [ 'name' => $artistName ] );
@@ -70,9 +73,11 @@ class AdminCommand extends Command {
         	
 
         	// insert albums and artist images
-        	$artistHandle = opendir($artistName);
-        	chdir($artistName);
-        	while (false !== ($albumName = readdir($artistHandle))) {
+            chdir($artistName); 
+        	$albums = scandir('.');
+            natsort($albums);
+        	
+        	foreach ( $albums as $albumName ) {
         		if ( $albumName == "." || $albumName == ".." ) continue;
 
         		if (is_dir($albumName)) {
@@ -85,9 +90,10 @@ class AdminCommand extends Command {
         			
 
         			// insert songs and album images
-        			$albumHandle = opendir($albumName);
-        			chdir($albumName);
-        			while (false !== ($songName = readdir($albumHandle))) {
+                    chdir($albumName); 
+        			$songs = scandir('.');
+                    natsort($songs);
+        			foreach ( $songs as $songName ) {
         				if ( $songName == "." || $songName == ".." ) continue;
 
         				if ( static::isSong($songName) ) {
@@ -110,7 +116,6 @@ class AdminCommand extends Command {
                             static::createThumbs($albumImage);
         				}
         			}
-        			closedir($albumHandle);
                     chdir("..");
 
         		} elseif( static::isImage($albumName) ) {
@@ -124,10 +129,8 @@ class AdminCommand extends Command {
                     static::createThumbs($artistImage);
         		}
         	}
-        	closedir($artistHandle);
             chdir("..");
     	}
-    	closedir($musicHandle);
     	DB::commit();
 	}
 

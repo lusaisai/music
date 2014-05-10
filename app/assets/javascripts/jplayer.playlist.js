@@ -24,6 +24,7 @@
 	jPlayerPlaylist = function(cssSelector, playlist, options) {
 		var self = this;
 
+		this.schedule = undefined; // for rebuffering
 		this.current = 0;
 		this.loop = false; // Flag used with the jPlayer repeat event
 		this.shuffled = false;
@@ -405,18 +406,16 @@
 		play: function(index) {
 			var that = this;
 
-			var schedule;
-
 			var reBufferPlay = function () {
 				var audio = document.getElementById('jp_audio_0');
 				if ( !audio.buffered.length ) {
 					that.select(index);
-					schedule = setTimeout( reBufferPlay, 5000 );
+					that.schedule = setTimeout( reBufferPlay, 5000 );
 				} else {
 					var buffertime = audio.buffered.end(audio.buffered.length-1);
 					if ( buffertime < 10 ) {
 						that.select(index);
-						schedule = setTimeout( reBufferPlay, 5000 );
+						that.schedule = setTimeout( reBufferPlay, 5000 );
 					} else {
 						$(that.cssSelector.jPlayer).jPlayer("play");
 					}
@@ -430,8 +429,8 @@
 			if(0 <= index && index < this.playlist.length) {
 				if(this.playlist.length) {
 					this.select(index);
-					clearTimeout(schedule);
-					schedule = setTimeout( reBufferPlay, 500 );
+					clearTimeout(this.schedule);
+					this.schedule = setTimeout( reBufferPlay, 500 );
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");

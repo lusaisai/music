@@ -85,7 +85,7 @@ $(document).ready(function(){
     };
 
 
-    var readPlayStatus = function () {
+    var readyPlayStatus = function () {
         var playerID = "#jquery_jplayer_1";
         var playlist = localStorage.getItem('playlist');
         if (playlist) {
@@ -124,7 +124,10 @@ $(document).ready(function(){
         window.mPlayList = myPlaylist; // exposed to window object for other javascripts to use
     };
 
-    
+    var errorReplay = function (event) {
+        var time = localStorage.getItem('currenttime');
+        $('#jquery_jplayer_1').jPlayer( 'play', parseFloat(time) );
+    };
 
     myPlaylist = new jPlayerPlaylist(
             {
@@ -143,8 +146,9 @@ $(document).ready(function(){
                     autoPlay: false,
                     enableRemoveControls: true
                 },
-                ready: readPlayStatus,
-                progress: buffer
+                ready: readyPlayStatus,
+                progress: buffer,
+                error: errorReplay
             }
     );
 
