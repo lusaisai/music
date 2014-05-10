@@ -21,6 +21,7 @@ $(document).ready(function(){
 
             if ( Math.floor(duration) == Math.floor(buffertime) ) {
                 setBufferWidth(100 - event.jPlayer.status.currentPercentRelative);
+                $('.jp-seek-bar').css('width', '225px'); // tmp fix of bootstrap stack gap
             } else {
                 setBufferWidth( (buffertime - playtime) * 100 / duration);
             }
