@@ -410,12 +410,12 @@
 				var audio = document.getElementById('jp_audio_0');
 				if ( !audio.buffered.length ) {
 					that.select(index);
-					that.schedule = setTimeout( reBufferPlay, 5000 );
+					that.schedule = setTimeout( reBufferPlay, 3600 );
 				} else {
 					var buffertime = audio.buffered.end(audio.buffered.length-1);
 					if ( buffertime < 10 ) {
 						that.select(index);
-						that.schedule = setTimeout( reBufferPlay, 5000 );
+						that.schedule = setTimeout( reBufferPlay, 3600 );
 					} else {
 						$(that.cssSelector.jPlayer).jPlayer("play");
 					}
