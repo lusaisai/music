@@ -164,7 +164,7 @@ $(document).ready(function(){
                 ready: readyPlayStatus,
                 progress: buffer,
                 error: errorReplay,
-                waiting: waitingReload
+                stalled: waitingReload
             }
     );
 
