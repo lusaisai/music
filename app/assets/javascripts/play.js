@@ -130,6 +130,20 @@ $(document).ready(function(){
         $('#jquery_jplayer_1').jPlayer( 'play', parseFloat(time) );
     };
 
+    var waitingReload = function (event) {
+        var playtime = event.jPlayer.status.currentTime;
+        if ( playtime < 10 ) { return; }
+        setTimeout( function () {
+            var audio = document.getElementById('jp_audio_0');
+            var buffertime = audio.buffered.end(audio.buffered.length-1);
+            if ( buffertime - playtime < 10 ) { // reconnect to website, it might be faster
+                myPlaylist.select(myPlaylist.current);
+                $('#jquery_jplayer_1').jPlayer( 'play', event.jPlayer.status.currentTime );
+            }
+        }, 3600 );
+        
+    };
+
     myPlaylist = new jPlayerPlaylist(
             {
                 jPlayer: "#jquery_jplayer_1",
@@ -149,7 +163,8 @@ $(document).ready(function(){
                 },
                 ready: readyPlayStatus,
                 progress: buffer,
-                error: errorReplay
+                error: errorReplay,
+                waiting: waitingReload
             }
     );
 
