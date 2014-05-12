@@ -52,6 +52,17 @@
 		</a>
 		<script>$("#userpanel a").tooltip("hide");</script>
 	</div>
+	<div id="inspector"></div>
+	<script type="text/javascript">
+		$(function () {
+			$("#inspector").jPlayerInspector( {
+				jPlayer: $('#jquery_jplayer_1'),
+				idPrefix: "jplayer_inspector_",
+				visible: false
+			} );
+		});
+	</script>
+
 	<div id="lyricer"></div>
 </div>
 <script type="text/javascript">
