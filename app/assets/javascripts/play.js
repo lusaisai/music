@@ -28,7 +28,7 @@ $(document).ready(function(){
             }
 
             // when buffering speed is slow, need to consider to reconnect to source
-            if ( playtime > 10 && buffertime - playtime < 2 ) {
+            if ( playtime > 10 && playtime < duration - 10 && buffertime - playtime < 2   ) {
                 waitingReload(event);
             }
             
