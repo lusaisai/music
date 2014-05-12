@@ -9,6 +9,7 @@ $(document).ready(function(){
             $('.jp-buffer-bar').attr('style',  'width: ' + width + '%' );
         };
 
+    // show the buffer bar
     var buffer = function (event) {
         var audio = document.getElementById('jp_audio_0');
 
@@ -25,10 +26,16 @@ $(document).ready(function(){
             } else {
                 setBufferWidth( (buffertime - playtime) * 100 / duration);
             }
-        }
 
-        
+            // when buffering speed is slow, need to consider to reconnect to source
+            if ( playtime > 10 && buffertime - playtime < 2 ) {
+                waitingReload(event);
+            }
+            
+        } 
     };
+
+
 
     var doWhenTimeUpdates = function(event) {
         buffer(event);
@@ -130,7 +137,14 @@ $(document).ready(function(){
         $('#jquery_jplayer_1').jPlayer( 'play', parseFloat(time) );
     };
 
+    var waitingReloadScheduled = false;
     var waitingReload = function (event) {
+        if (waitingReloadScheduled) {
+            return;
+        } else {
+            waitingReloadScheduled = true;
+        }
+
         var playtime = event.jPlayer.status.currentTime;
         if ( playtime < 10 ) { return; }
         setTimeout( function () {
@@ -140,6 +154,7 @@ $(document).ready(function(){
                 myPlaylist.select(myPlaylist.current);
                 $('#jquery_jplayer_1').jPlayer( 'play', event.jPlayer.status.currentTime );
             }
+            waitingReloadScheduled = false;
         }, 3600 );
         
     };

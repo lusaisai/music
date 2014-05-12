@@ -430,7 +430,8 @@
 				if(this.playlist.length) {
 					this.select(index);
 					clearTimeout(this.schedule);
-					this.schedule = setTimeout( reBufferPlay, 500 );
+					// $(this.cssSelector.jPlayer).jPlayer("play");
+					this.schedule = setTimeout( reBufferPlay, 1800 );
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");
