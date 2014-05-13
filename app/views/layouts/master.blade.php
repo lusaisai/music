@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="image/ico" href="/assets/img/favicon.ico"/>
-    <meta name="description" content="lusaisai music collection 陆赛赛 音乐收藏">
+    <meta name="description" content="lusaisai music collection 陆赛赛 {{{ $keywords or '音乐收藏'  }}}">
     <meta name="keywords" content="{{{ $keywords or '音乐收藏'  }}}">
     
 	<title>{{{ Poem::orderBy(DB::raw('rand()'))->pluck('content') }}}</title>
