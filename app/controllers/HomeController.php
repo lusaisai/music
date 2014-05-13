@@ -4,7 +4,12 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		return Response::view('home.index', [ 'page' => 'home' ]);
+		$songs = $this->topSongs( 0, 'all', 10 );
+		$keywords = [];
+		foreach ($songs as $song) {
+			$keywords[] = $song->song_name;
+		}
+		return Response::view('home.index', [ 'page' => 'home', 'keywords' => implode(',', $keywords) ]);
 	}
 
 	public function randomPlay()
@@ -54,7 +59,7 @@ class HomeController extends BaseController {
 
 	}
 
-	public function topSongs( $userid = 0, $time = "all" )
+	public function topSongs( $userid = 0, $time = "all", $count = 50 )
 	{
 		switch ($time) {
 			case 'week':
@@ -79,7 +84,7 @@ class HomeController extends BaseController {
 		}
 		$query .= " group by 1,2
 		order by cnt desc
-		limit 50
+		limit $count
 		";
 		return DB::select($query);
 	}
