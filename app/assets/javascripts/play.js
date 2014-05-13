@@ -154,7 +154,11 @@ $(document).ready(function(){
             var buffertime = audio.buffered.end(audio.buffered.length-1);
             if ( buffertime - playtime < 10 ) { // reconnect to website, it might be faster
                 myPlaylist.select(myPlaylist.current);
-                $('#jquery_jplayer_1').jPlayer( 'play', event.jPlayer.status.currentTime );
+                if ( event.jPlayer.status.paused ) {
+                    $('#jquery_jplayer_1').jPlayer( 'pause', event.jPlayer.status.currentTime );
+                } else {
+                    $('#jquery_jplayer_1').jPlayer( 'play', event.jPlayer.status.currentTime );
+                }
             }
             waitingReloadScheduled = false;
         }, 3600 );
