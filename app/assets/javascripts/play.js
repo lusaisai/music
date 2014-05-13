@@ -133,7 +133,9 @@ $(document).ready(function(){
     };
 
     var errorReplay = function (event) {
+        var index = localStorage.getItem('currentsong');
         var time = localStorage.getItem('currenttime');
+        myPlaylist.select( parseInt(index) );
         $('#jquery_jplayer_1').jPlayer( 'play', parseFloat(time) );
     };
 
