@@ -44,7 +44,10 @@ class HomeController extends BaseController {
 			$ids[] = $song->id;
 		}
 
-		return Response::json(UtilsController::songInfo(Song::with('album.artist')->findMany($ids)));
+		$songdata = UtilsController::songInfo(Song::with('album.artist')->findMany($ids));
+		shuffle($songdata);
+		
+		return Response::json( $songdata );
 	}
 
 	public function popularSongs( $user = "all", $time = "all")
