@@ -141,14 +141,11 @@ $(document).ready(function(){
 
     var waitingReloadScheduled = false;
     var waitingReload = function (event) {
-        if (waitingReloadScheduled) {
-            return;
-        } else {
-            waitingReloadScheduled = true;
-        }
-
+        if (waitingReloadScheduled) {return; }
         var playtime = event.jPlayer.status.currentTime;
         if ( playtime < 10 ) { return; }
+
+        waitingReloadScheduled = true;
         setTimeout( function () {
             var audio = document.getElementById('jp_audio_0');
             var buffertime = audio.buffered.end(audio.buffered.length-1);
