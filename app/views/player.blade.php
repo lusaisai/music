@@ -52,7 +52,7 @@
 		</a>
 		<script>$("#userpanel a").tooltip("hide");</script>
 	</div>
-	@if (app()->environment() == 'local')
+	@if ( App::isLocal() )
 		<div id="inspector"></div>
 		<script type="text/javascript">
 			$(function () {
