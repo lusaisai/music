@@ -40,7 +40,7 @@ public class AppTest
 
         Lyricer lrc = new BaiduLyricer();
         System.out.println(lrc.findLrcLyric("品冠", "疼你的责任"));
-        System.out.println(lrc.findLrcLyric("", "泡沫"));
+        System.out.println(lrc.findLrcLyric("品冠", "最美的问候"));
         lrc = new Lrc123Lyricer();
         System.out.println(lrc.findLrcLyric("品冠", "疼你的责任"));
     }

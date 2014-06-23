@@ -10,7 +10,7 @@ return array(
 	|
 	*/
 
-	'dir' => '/mnt/ent/Music',
+	'dir' => '/mnt/hgfs/Music',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -20,6 +20,6 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost/resources/music',
+	'url' => 'http://mint/resources/music',
 
 );

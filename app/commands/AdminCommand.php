@@ -53,7 +53,7 @@ class AdminCommand extends Command {
 	 */
 	private function update($fullRefresh = false)
 	{
-		$this->comment('This may take a whike, please wait ...');
+		$this->comment('This may take a while, please wait ...');
 		$musicDir = Config::get( "music.dir" );
 
         DB::beginTransaction();

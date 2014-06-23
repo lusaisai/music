@@ -34,7 +34,7 @@ public class BaiduLyricer extends Lyricer {
             Elements songLyrics = e.select(".lrc-content p");
             if ( !songTitles.isEmpty() && !songLyrics.isEmpty() ) {
                 String songTitle = songTitles.first().attr("title");
-                if ( title.equalsIgnoreCase(songTitle) ) {
+                if ( songTitle.toLowerCase().contains(title.toLowerCase()) || title.toLowerCase().contains(songTitle.toLowerCase()) ) {
                     Elements lrcs = e.select(".down-lrc-btn");
                     if (lrcs.isEmpty()) continue;
                     Element lrc = lrcs.first();
