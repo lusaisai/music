@@ -21,6 +21,9 @@ Route::resource('albums', 'AlbumsController', [ 'only' => ['index'] ]);
 Route::resource('songs', 'SongsController', [ 'only' => ['index'] ]);
 Route::resource('playlists', 'PlaylistsController');
 
+Route::get('/utils/artists', array('uses' => 'UtilsController@artists'));
+Route::get('/utils/albums', array('uses' => 'UtilsController@albums'));
+Route::get('/utils/songs', array('uses' => 'UtilsController@songs'));
 Route::get('/utils/songmeta/{songids}', array('uses' => 'UtilsController@songMeta'));
 Route::get('/utils/lyric/{songid}', array('uses' => 'UtilsController@lyric'));
 Route::post('/utils/stats/{songid}', array('uses' => 'UtilsController@stats'));

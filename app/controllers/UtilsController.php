@@ -12,6 +12,21 @@ class UtilsController extends \BaseController
 	    return Response::json(static::songInfo($songs));
 	}
 
+	public function artists()
+	{
+		return Response::json( Artist::all( [ 'name', 'pinyin_name' ] ) );
+	}
+
+	public function albums()
+	{
+		return Response::json( Album::all( [ 'name', 'pinyin_name' ] ) );
+	}
+
+	public function songs()
+	{
+		return Response::json( Song::all( [ 'name', 'pinyin_name' ] ) );
+	}
+
 	public static function songInfo($songs)
 	{
 		$musicUrlPre = Config::get( "music.url" );	    

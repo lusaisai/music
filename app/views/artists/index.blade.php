@@ -3,7 +3,7 @@
 @section('main')
 <div id="searching">
         <form class="form-inline form-search" method="get" action="/artists" autocomplete="off">
-            <input data-provide="typeahead" name="words" style="width:350px" type="text" class="typeahead form-control" placeholder="品冠">
+            <input name="words" style="width:350px" type="text" class="form-control" placeholder="品冠">
             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
         </form>
     </div>
