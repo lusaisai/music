@@ -22,7 +22,9 @@ $(function() {
 			$(".form-search input").autocomplete({
 				minLength: 1,
 				source: process(type),
-				select: function( event, ui ) {
+				select: function( e, ui ) {
+					e.preventDefault();
+					$("form.form-search input").val(ui.item.value);
 					$("form.form-search").submit();
 				}
 			});
