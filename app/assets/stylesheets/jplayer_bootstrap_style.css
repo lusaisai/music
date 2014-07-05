@@ -14,7 +14,7 @@
 .jp-controls li,
 .jp-toggles li,
 .jp-playlist li {
-  display: inline;
+  display: inline !important;
   font-family: "Microsoft YaHei","Hiragino Sans GB W3",Tahoma,Arial;
   text-shadow: 0 0 1px #EEEEEE;
 }
