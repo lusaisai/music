@@ -13,4 +13,5 @@
 
 Artisan::add(new AdminCommand);
 Artisan::add(new LyricsCommand);
+Artisan::add(new AdminClean);
 
