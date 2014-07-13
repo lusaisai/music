@@ -56,7 +56,7 @@
 
 
 
-  var fontSize = d3.scale.log().range([20, 35]);
+  var fontSize = d3.scale.log().range([20, 30]);
 
   var setCloud = function(data) {
     d3.layout.cloud()
