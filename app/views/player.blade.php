@@ -30,7 +30,7 @@
 						<div class="jp-buffer-bar progress-bar" style="width: 0%"></div>
 					</div>
 				</div>
-				<div id="time">
+				<div class="jp-times">
 					<div class="jp-current-time badge"></div>
 					<div class="jp-duration badge"></div>
 				</div>

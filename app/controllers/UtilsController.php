@@ -14,17 +14,18 @@ class UtilsController extends \BaseController
 
 	public function artists()
 	{
-		return Response::json( Artist::all( [ 'name', 'pinyin_name' ] ) );
+		// return Response::json( Artist::all( [ 'name', 'pinyin_name' ] ) );
+		return Response::json( DB::table('artists')->select( 'name', 'pinyin_name' )->distinct()->get() );
 	}
 
 	public function albums()
 	{
-		return Response::json( Album::all( [ 'name', 'pinyin_name' ] ) );
+		return Response::json( DB::table('albums')->select( 'name', 'pinyin_name' )->distinct()->get() );
 	}
 
 	public function songs()
 	{
-		return Response::json( Song::all( [ 'name', 'pinyin_name' ] ) );
+		return Response::json( DB::table('songs')->select( 'name', 'pinyin_name' )->distinct()->get() );
 	}
 
 	public static function songInfo($songs)
