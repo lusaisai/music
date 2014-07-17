@@ -66,7 +66,7 @@ class UtilsController extends \BaseController
 
 	private function playlog($id)
 	{
-		$log = Playlog::create([ 'user_id' => Session::get("userid", -1), 'song_id' => $id ]);
+		$log = Playlog::create([ 'user_id' => ( is_null(Auth::id()) ? -1 : Auth::id() ), 'song_id' => $id ]);
 	}
 }
 
