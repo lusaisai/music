@@ -39,6 +39,7 @@ class UtilsController extends \BaseController
 	        $tmp["title"] = $song->name;
 	        $tmp["song_info"] = "From: " . $song->album->artist->name . " - " . $song->album->name;
 	        $tmp["mp3"] = "{$musicUrlPre}/{$song->album->artist->name}/{$song->album->name}/{$song->file_name}";
+	        $tmp["m4a"] = "{$musicUrlPre}/{$song->album->artist->name}/{$song->album->name}/{$song->file_name}";
 	        array_push($songArray, $tmp);
 	    }
 
