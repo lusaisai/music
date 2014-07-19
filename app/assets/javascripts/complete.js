@@ -7,7 +7,7 @@ $(function() {
 
 			var count = 0;
 			for (var i = 0; i < data.length; i++) {
-				if ( data[i].pinyin_name.toLowerCase().indexOf(term.toLowerCase()) >= 0 ) {
+				if ( data[i].pinyin_name.toLowerCase().indexOf(term.toLowerCase()) >= 0 || data[i].name.toLowerCase().indexOf(term.toLowerCase()) >= 0 ) {
 					items.push(data[i].name);
 					count++;
 				}
