@@ -74,7 +74,7 @@ class PoemTableSeeder extends Seeder {
 		Poem::create( [ 'content' => '而今识尽愁滋味 欲说还休 欲说还休 却道天凉好个秋', 'poet' => '辛弃疾' ] );
 		Poem::create( [ 'content' => '七八个星天外 两三点雨山前 旧时茅店社林边 路转溪桥忽见', 'poet' => '辛弃疾' ] );
 		Poem::create( [ 'content' => '韶华不为少年留 恨悠悠 几时休', 'poet' => '秦观' ] );
-		Poem::create( [ 'content' => '金风玉露一相逢 便胜却 人间无数', 'poet' => '秦观' ] );
+		Poem::create( [ 'content' => '金风玉露一相逢 便胜却人间无数', 'poet' => '秦观' ] );
 		Poem::create( [ 'content' => '柔情似水 佳期如梦 忍顾鹊桥归路 两情若是久长时 又岂在 朝朝暮暮', 'poet' => '秦观' ] );
 		Poem::create( [ 'content' => '无情 任是无情也动人', 'poet' => '秦观' ] );
 		Poem::create( [ 'content' => '今年花胜去年红 可惜明年花更好 知与谁同', 'poet' => '欧阳修' ] );
@@ -114,6 +114,7 @@ class PoemTableSeeder extends Seeder {
 		Poem::create( [ 'content' => '黛玉笑道:"偏是咬舌子爱说话,连个‘二’哥哥也叫不出来, 只是‘爱‘哥哥’爱‘哥哥的.回来赶围棋儿,又该你闹’幺爱三四五‘了.', 'poet' => '红楼梦' ] );
 		Poem::create( [ 'content' => '每日家情思睡昏昏', 'poet' => '林黛玉' ] );
 		Poem::create( [ 'content' => '黛玉道：“别理他，你先给 我舀水去罢。”紫鹃笑道：“他是客，自然先倒了茶来再舀水去。”说着倒茶去了。宝玉笑道：“好丫头，‘若共你多情小姐同鸳帐，怎舍得叠被铺床？’”', 'poet' => '红楼梦' ] );
+		Poem::create( [ 'content' => '夜月一帘幽梦, 春风十里柔情', 'poet' => '秦观' ] );
 
 	}
 
