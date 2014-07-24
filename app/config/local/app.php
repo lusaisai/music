@@ -26,6 +26,6 @@ return array(
 	|
 	*/
 
-	'url' => 'http://music.dev.com',
+	'url' => 'http://music.dev.local',
 
 );
