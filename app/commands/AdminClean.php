@@ -47,36 +47,36 @@ class AdminClean extends Command {
 		$artists = Artist::all();
 		foreach ($artists as $artist) {
 			$artistDir = $this->musicDir . '/' . $artist->name;
-			if ( ! is_dir($artistDir) ) {
+			if ( ! is_dir(static::toSystemCode($artistDir)) ) {
 				// clean his/her albums
 				$this->cleanAlbums($artist->albums);
 
 				// clean his/her images
 				foreach ($artist->images as $image) {
-					$this->info('cleaning up ' . $image->name);
+					$this->info('cleaning up ' . static::toSystemCode($image->name));
 					$image->delete();
 				}
 
 				// clean artist
-				$this->info('cleaning up ' . $artist->name);
+				$this->info('cleaning up ' . static::toSystemCode($artist->name));
 				$artist->delete();
 			} else {
 				foreach ($artist->albums as $album) {
 					$albumDir = $artistDir . '/' . $album->name;
-					if (! is_dir($albumDir)) {
+					if (! is_dir(static::toSystemCode($albumDir))) {
 						$this->cleanAlbums(array($album));
 					} else {
 						foreach ($album->songs as $song) {
 							$songFile = $albumDir . '/' . $song->file_name;
-							if (! is_file($songFile)) {
-								$this->info('cleaning up ' . $song->name);
+							if (! is_file(static::toSystemCode($songFile)) ) {
+								$this->info('cleaning up ' . static::toSystemCode($song->name));
 								$song->delete();
 							}
 						}
 						foreach ($album->images as $image) {
 							$imageFile = $albumDir . '/' . $image->name;
-							if ( ! is_file($imageFile) ) {
-								$this->info('cleaning up ' . $image->name);
+							if ( ! is_file(static::toSystemCode($imageFile) )) {
+								$this->info('cleaning up ' . static::toSystemCode($image->name));
 								$image->delete();
 							}
 						}
@@ -85,8 +85,8 @@ class AdminClean extends Command {
 
 				foreach ($artist->images as $image) {
 					$imageFile = $artistDir . '/' . $image->name;
-					if ( ! is_file($imageFile) ) {
-						$this->info('cleaning up ' . $image->name);
+					if ( ! is_file(static::toSystemCode($imageFile) )) {
+						$this->info('cleaning up ' . static::toSystemCode($image->name));
 						$image->delete();
 					}
 				}
@@ -99,17 +99,28 @@ class AdminClean extends Command {
 		foreach ($albums as $album) {
 			// clean album's songs/images
 			foreach ($album->songs as $song) {
-				$this->info('cleaning up ' . $song->name);
+				$this->info('cleaning up ' . static::toSystemCode($song->name));
 				$song->delete();
 			}
 			foreach ($album->images as $image) {
-				$this->info('cleaning up ' . $image->name);
+				$this->info('cleaning up ' . static::toSystemCode($image->name));
 				$image->delete();
 			}
-			$this->info('cleaning up ' . $album->name);
+			$this->info('cleaning up ' . static::toSystemCode($album->name));
 			$album->delete();
 		}
 	}
+
+	private function toSystemCode($value)
+    {
+        $to = Config::get('music.encoding');
+        if ( $to == 'utf-8' ) {
+            return $value;
+        } else {
+            return mb_convert_encoding($value, $to, 'utf-8');
+        }
+    }
+
 
 
 	// /**

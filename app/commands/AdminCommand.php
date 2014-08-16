@@ -64,11 +64,11 @@ class AdminCommand extends Command {
         foreach ($artists as $artistName) {
 			// artists
         	if ( $artistName == "." || $artistName == ".." || ! is_dir($artistName) ) continue;
-        	$artist = Artist::firstOrNew( [ 'name' => $artistName ] );
+        	$artist = Artist::firstOrNew( [ 'name' => static::toUTF8($artistName) ] );
         	if ( !$artist->exists || $fullRefresh ) {
-        		$artist->pinyin_name = static::toPinyin($artistName);
+        		$artist->pinyin_name = static::toPinyin(static::toUTF8($artistName));
         		$artist->save();
-        		$this->info('Updated ' . $artist->name);
+        		$this->info('Updated ' . $artistName);
         	}
         	
 
@@ -81,11 +81,11 @@ class AdminCommand extends Command {
         		if ( $albumName == "." || $albumName == ".." ) continue;
 
         		if (is_dir($albumName)) {
-        			$album = Album::firstOrNew( [ 'name' => $albumName, 'artist_id' => $artist->id ] );
+        			$album = Album::firstOrNew( [ 'name' => static::toUTF8($albumName), 'artist_id' => $artist->id ] );
         			if ( !$album->exists || $fullRefresh ) {
-        				$album->pinyin_name = static::toPinyin($albumName);
+        				$album->pinyin_name = static::toPinyin(static::toUTF8($albumName));
         				$album->save();
-        				$this->info('Updated ' . $album->name);
+        				$this->info('Updated ' . $albumName);
         			}
         			
 
@@ -96,34 +96,34 @@ class AdminCommand extends Command {
         			foreach ( $songs as $songName ) {
         				if ( $songName == "." || $songName == ".." ) continue;
 
-        				if ( static::isSong($songName) ) {
-        					$song = Song::firstOrNew( [ 'file_name' => $songName, 'album_id' => $album->id ] );
+        				if ( static::isSong(static::toUTF8($songName)) ) {
+        					$song = Song::firstOrNew( [ 'file_name' => static::toUTF8($songName), 'album_id' => $album->id ] );
         					if ( !$song->exists || $fullRefresh ) {
-        						$song->name = static::songClean($songName);
+        						$song->name = static::songClean(static::toUTF8($songName));
         						$song->pinyin_name = static::toPinyin($song->name);
         						$song->lrc_lyric = null;
         						$song->save();
-        						$this->info('Updated ' . $song->name);
+        						$this->info('Updated ' . $songName);
         					}
         					
-        				} elseif (static::isImage($songName)) {
+        				} elseif (static::isImage(static::toUTF8($songName))) {
         					$albumImage = $songName;
-        					$image = Image::firstOrNew( [ 'name' => $albumImage, 'album_id' => $album->id ] );
+        					$image = Image::firstOrNew( [ 'name' => static::toUTF8($albumImage), 'album_id' => $album->id ] );
         					if ( !$image->exists || $fullRefresh ) {
         						$image->save();
-        						$this->info('Updated ' . $image->name);
+        						$this->info('Updated ' . $albumImage);
         					}
                             static::createThumbs($albumImage);
         				}
         			}
                     chdir("..");
 
-        		} elseif( static::isImage($albumName) ) {
+        		} elseif( static::isImage(static::toUTF8($albumName)) ) {
         			$artistImage = $albumName;
-                    $image = Image::firstOrNew( [ 'name' => $artistImage, 'artist_id' => $artist->id ] );
+                    $image = Image::firstOrNew( [ 'name' => static::toUTF8($artistImage), 'artist_id' => $artist->id ] );
                     if ( !$image->exists || $fullRefresh ) {
                     	$image->save();
-                    	$this->info('Updated ' . $image->name);
+                    	$this->info('Updated ' . $artistImage);
                     }
 
                     static::createThumbs($artistImage);
@@ -206,6 +206,16 @@ class AdminCommand extends Command {
 	{
 		return preg_match('/(mp3|m4a)$/i', $name);
 	}
+
+    private function toUTF8($value)
+    {
+        $from = Config::get('music.encoding');
+        if ( $from == 'utf-8' ) {
+            return $value;
+        } else {
+            return mb_convert_encoding($value, 'utf-8', $from);
+        }
+    }
 
     private static function createThumbs($name, $overwrite = false)
     {

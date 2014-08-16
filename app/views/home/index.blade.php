@@ -38,7 +38,6 @@
     	<input type="radio" name="options"> All
   	</label>
 </div>
-
 <div id="top-song-cloud"></div>
 <script>
 (function() {
@@ -53,8 +52,6 @@
       }
     });
   };
-
-
 
   var fontSize = d3.scale.log().range([20, 30]);
 
