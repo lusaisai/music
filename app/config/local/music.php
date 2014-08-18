@@ -20,7 +20,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost/resources/music',
+	'url' => 'http://localhost:8000/music',
 
 	/*
 	|--------------------------------------------------------------------------
