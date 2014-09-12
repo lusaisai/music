@@ -39,8 +39,7 @@ class LyricsCommand extends Command {
 	{
 		$path = app_path();
 		$jar = $path .'/LyricSearch/target/LyricSearch-1.0-SNAPSHOT-jar-with-dependencies.jar';
-		system('chcp 65001');
-		system( "java -Dfile.encoding=UTF-8 -jar $jar");
+		system( "java -jar $jar");
 	}
 
 }
