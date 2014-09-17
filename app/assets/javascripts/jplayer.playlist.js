@@ -407,16 +407,16 @@
 			var that = this;
 			var oldsongid = $('.jp-playlist-current').attr("songid");
 
-			var reBufferPlay = function () {
+			var reBufferPlay = function (delay) {
 				var audio = document.getElementById('jp_audio_0');
 				if ( !audio.buffered.length ) {
 					that.select(index);
-					that.schedule = setTimeout( reBufferPlay, 3600 );
+					that.schedule = setTimeout( function(){ reBufferPlay(2*delay); }, 2*delay );
 				} else {
 					var buffertime = audio.buffered.end(audio.buffered.length-1);
 					if ( buffertime < 10 ) {
 						that.select(index);
-						that.schedule = setTimeout( reBufferPlay, 3600 );
+						that.schedule = setTimeout( function(){ reBufferPlay(2*delay); }, 2*delay );
 					} else {
 						$(that.cssSelector.jPlayer).jPlayer("play");
 						// add for stats
@@ -437,7 +437,7 @@
 					this.select(index);
 					clearTimeout(this.schedule);
 					// $(this.cssSelector.jPlayer).jPlayer("play");
-					this.schedule = setTimeout( reBufferPlay, 500 );
+					this.schedule = setTimeout( function(){ reBufferPlay(100); }, 100 );;
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");
