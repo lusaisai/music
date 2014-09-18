@@ -411,12 +411,12 @@
 				var audio = document.getElementById('jp_audio_0');
 				if ( !audio.buffered.length ) {
 					that.select(index);
-					that.schedule = setTimeout( function(){ reBufferPlay(2*delay); }, 2*delay );
+					that.schedule = setTimeout( function(){ reBufferPlay(1.1*delay); }, 1.1*delay );
 				} else {
 					var buffertime = audio.buffered.end(audio.buffered.length-1);
 					if ( buffertime < 10 ) {
 						that.select(index);
-						that.schedule = setTimeout( function(){ reBufferPlay(2*delay); }, 2*delay );
+						that.schedule = setTimeout( function(){ reBufferPlay(1.1*delay); }, 1.1*delay );
 					} else {
 						$(that.cssSelector.jPlayer).jPlayer("play");
 						// add for stats
@@ -437,7 +437,7 @@
 					this.select(index);
 					clearTimeout(this.schedule);
 					// $(this.cssSelector.jPlayer).jPlayer("play");
-					this.schedule = setTimeout( function(){ reBufferPlay(100); }, 100 );;
+					this.schedule = setTimeout( function(){ reBufferPlay(1800); }, 500 );;
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");
