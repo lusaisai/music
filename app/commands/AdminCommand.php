@@ -113,7 +113,7 @@ class AdminCommand extends Command {
         						$image->save();
         						$this->info('Updated ' . $albumImage);
         					}
-                            static::createThumbs($albumImage);
+                            // static::createThumbs($albumImage);
         				}
         			}
                     chdir("..");
@@ -126,7 +126,7 @@ class AdminCommand extends Command {
                     	$this->info('Updated ' . $artistImage);
                     }
 
-                    static::createThumbs($artistImage);
+                    // static::createThumbs($artistImage);
         		}
         	}
             chdir("..");

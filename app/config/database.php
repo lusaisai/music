@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'music',
 			'username'  => 'music',
-			'password'  => 'music',
+			'password'  => 'music633',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -114,7 +114,7 @@ return array(
 		'cluster' => false,
 
 		'default' => array(
-			'host'     => '127.0.0.1',
+			'host'     => 'mint',
 			'port'     => 6379,
 			'database' => 0,
 		),
