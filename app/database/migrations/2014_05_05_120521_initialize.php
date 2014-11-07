@@ -104,6 +104,13 @@ class Initialize extends Migration {
 			$table->timestamps();
 		});
 
+		Schema::create('cache', function($table)
+		{
+		    $table->string('key')->unique();
+		    $table->text('value');
+		    $table->integer('expiration');
+		});
+
 	}
 
 	/**
@@ -122,6 +129,7 @@ class Initialize extends Migration {
 		Schema::dropIfExists('songs');
 		Schema::dropIfExists('images');
 		Schema::dropIfExists('users');
+		Schema::dropIfExists('cache');
 	}
 
 }

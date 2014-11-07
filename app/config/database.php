@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'music',
 			'username'  => 'music',
-			'password'  => 'music633',
+			'password'  => 'music',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

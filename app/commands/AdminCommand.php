@@ -164,7 +164,7 @@ class AdminCommand extends Command {
             $pinyin = static::pinyinConcat($pinyin, $possiable_pinyins);
         }
 
-        return implode(',', $pinyin);
+        return substr( implode(',', $pinyin), 0, 255 );
     }
 
     private static function pinyinConcat($data, $append)
