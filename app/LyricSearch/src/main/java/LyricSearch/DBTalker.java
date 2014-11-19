@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class DBTalker {
     private static final String USERNAME = "music";
-    private static final String PASSWORD = "music633";
+    private static final String PASSWORD = "music";
     private static final String DATABASE = "music";
     private static final String URL = "jdbc:mysql://localhost:3306/" + DATABASE + "?characterEncoding=UTF-8";
     private Connection con;
