@@ -37,11 +37,12 @@ class HomeController extends BaseController {
 			$songs->orWhere( 'songs.name', 'like', '%' . $words . '%' );
 		}
 
-		$songs = $songs->select('songs.id')->orderByRaw('rand()')->limit(15)->get();
+		$songs = $songs->select('songs.id')->get();
+		// $songs = $songs->select('songs.id')->orderByRaw('rand()')->limit(15)->get();
 
 		$ids  = [];
-		foreach ($songs as $song) {
-			$ids[] = $song->id;
+		foreach (array_rand( $songs, 15 ) as $choice) {
+			$ids[] = $songs[$choice]->id;
 		}
 
 		$songdata = UtilsController::songInfo(Song::with('album.artist')->findMany($ids));
