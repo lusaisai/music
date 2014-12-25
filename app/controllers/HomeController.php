@@ -41,11 +41,13 @@ class HomeController extends BaseController {
 		// $songs = $songs->select('songs.id')->orderByRaw('rand()')->limit(15)->get();
 
 		$ids  = [];
+		srand();
 		foreach (array_rand( $songs, 15 ) as $choice) {
 			$ids[] = $songs[$choice]->id;
 		}
 
 		$songdata = UtilsController::songInfo(Song::with('album.artist')->findMany($ids));
+		srand();
 		shuffle($songdata);
 		
 		return Response::json( $songdata );
