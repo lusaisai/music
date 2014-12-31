@@ -17,6 +17,10 @@ class HomeController extends BaseController {
 		$words = trim( Input::get('words', '') );
 		$words = preg_replace('!\s+!', ' ', $words);
 		$type = trim( Input::get('type', 'artist-name') );
+		$songCount = trim( Input::get('song-number', 15) );
+		if ( ! is_numeric($songCount) || $songCount <= 0 ) {
+			$songCount = 15;
+		}
 
 		$songs = DB::table('songs')
 					->join( 'albums', 'songs.album_id', '=', 'albums.id' )
@@ -42,7 +46,7 @@ class HomeController extends BaseController {
 
 		$ids  = [];
 		srand();
-		foreach (array_rand( $songs, 15 ) as $choice) {
+		foreach (array_rand( $songs, $songCount ) as $choice) {
 			$ids[] = $songs[$choice]->id;
 		}
 

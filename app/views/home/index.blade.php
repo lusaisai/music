@@ -4,13 +4,26 @@
 <div id="randoms">
 	<h3>Random Playing</h3>
 	<form role="form" class="form-inline form-search" method="get" autocomplete="off">
-	    <input name="words" style="width:350px" type="text" class="form-control" placeholder="品冠">
+	    <input name="words" style="width:200px" type="text" class="form-control" placeholder="品冠">
 	    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Random</button>
 	    <select name="type" class="type form-control" style="width:135px">
 	        <option value="artist-name">Artist Name</option>
 	        <option value="album-name">Album Name</option>
 	        <option value="song-name">Song Name</option>
 	    </select>
+      <div class="input-group number-spinner">
+        <span class="input-group-btn">
+          <button class="btn btn-default minus" type="button">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+          </button>
+        </span>
+        <input type="text" name="song-number" class="form-control" value="15">
+        <span class="input-group-btn">
+          <button class="btn btn-default plus" type="button">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+        </span>
+      </div>
 	</form>
 </div>
 <div id="popular-songs" class="tops">
@@ -40,6 +53,26 @@
 </div>
 <div id="top-song-cloud"></div>
 <script>
+(function () {
+  var jspinner = $('.number-spinner');
+  var jinput = jspinner.find('input');
+
+  var check = function () {
+    if ( ! $.isNumeric(jinput.val()) ) {
+      jinput.val(15);
+    }
+  };
+  
+  jspinner.find('.minus').click(function(event) {
+    check();
+    jinput.val( parseInt(jinput.val(),10) - 1 );
+  });
+  jspinner.find('.plus').click(function(event) {
+    check();
+    jinput.val( parseInt(jinput.val(),10) + 1 );
+  });
+}());
+
 (function() {
   var fetchData = function(user, time) {
     $('#top-song-cloud').fadeOut();

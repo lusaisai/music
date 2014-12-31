@@ -19,12 +19,12 @@ $(function() {
 
 	var preFetchData = function (type) {
 		$.getJSON( '/utils/' + type, function (type) {
-			$(".form-search input").autocomplete({
+			$(".form-search input").first().autocomplete({
 				minLength: 1,
 				source: process(type),
 				select: function( e, ui ) {
 					e.preventDefault();
-					$("form.form-search input").val(ui.item.value);
+					$("form.form-search input").first().val(ui.item.value);
 					$("form.form-search").submit();
 				}
 			});
