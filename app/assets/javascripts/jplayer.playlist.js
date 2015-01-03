@@ -414,7 +414,7 @@
 					that.schedule = setTimeout( function(){ reBufferPlay(1.2*delay); }, 1.2*delay );
 				} else {
 					var buffertime = audio.buffered.end(audio.buffered.length-1);
-					if ( buffertime < 10 ) {
+					if ( buffertime < 10 && audio.duration >= 10 ) {
 						that.select(index);
 						that.schedule = setTimeout( function(){ reBufferPlay(1.2*delay); }, 1.2*delay );
 					} else {

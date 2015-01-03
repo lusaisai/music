@@ -31,7 +31,6 @@ $(document).ready(function(){
             if ( playtime > 10 && playtime < duration - 10 && buffertime - playtime < 2   ) {
                 waitingReload(event);
             }
-            
         } 
     };
 
