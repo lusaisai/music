@@ -185,8 +185,10 @@ $(document).ready(function(){
             }
     );
 
-    var add = function(data) {
-        myPlaylist.add(data[0]);
+    var add = function (data) {
+        for (var i = 0; i < data.length; i++) {
+            myPlaylist.add(data[i]);
+        };
         playlistTooltip();
     };
 
@@ -216,10 +218,25 @@ $(document).ready(function(){
         };
     };
 
+    var addSongs = function (selector) {
+        return  function() {
+            var songs = [];
+
+            $(this).parent().parent().find(selector).each(function(){
+                if ( this.checked ){
+                    songs.push($(this).attr('songid'));
+                }
+            });
+            $.getJSON( '/utils/songmeta/' + songs.join(","), add );
+        };
+    };
+
     function plays(){
         $("#main").on( 'click','.album-play', playSongs("input"));
+        $("#main").on( 'click','.album-add', addSongs("input"));
 
         $("#main").on( 'click','.artist-play', playSongs(".in input"));
+        $("#main").on( 'click','.artist-add', addSongs(".in input"));
 
         $("#main").on( 'click','.song-play', function(){
             var songID = $(this).attr('songid');

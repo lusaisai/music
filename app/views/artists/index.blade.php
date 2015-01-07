@@ -47,6 +47,7 @@
         			</div>
         			<div class="btn-group">
         			    <button class="btn btn-primary song-list"><span class="glyphicon glyphicon-list"></span></button>
+                        <button artist_id="{{ $artist->id }}" class="btn btn-primary artist-add"><span class="glyphicon glyphicon-plus"></span> Add</button>
         			    <button artist_id="{{ $artist->id }}" class="btn btn-primary artist-play"><span class="glyphicon glyphicon-music"></span> Play</button>
         			</div>
         		</div>

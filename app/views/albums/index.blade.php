@@ -38,6 +38,7 @@
 				</div>
 				<div class="btn-group">
 					<button class="btn btn-primary song-list"><span class="glyphicon glyphicon-list"></span></button>
+					<button album_id="{{{ $album->id }}}" class="btn btn-primary album-add"><span class="glyphicon glyphicon-plus"></span> Add</button>
 					<button album_id="{{{ $album->id }}}" class="btn btn-primary album-play"><span class="glyphicon glyphicon-music"></span> Play</button>
 				</div>
 			</div>

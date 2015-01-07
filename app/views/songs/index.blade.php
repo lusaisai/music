@@ -30,6 +30,7 @@
                 <button class="btn btn-default uncheck-all">Uncheck All</button>
             </div>
             <div class="btn-group">
+                <button class="btn btn-primary album-add"><span class="glyphicon glyphicon-plus"></span> Add</button>
                 <button class="btn btn-primary album-play"><span class="glyphicon glyphicon-music"></span> Play</button>
             </div>
         </div>
