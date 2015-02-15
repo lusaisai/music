@@ -37,7 +37,7 @@ class UtilsController extends \BaseController
 	    	$tmp = array();
 	        $tmp["songid"] = $song->id;
 	        $tmp["title"] = $song->name;
-	        $tmp["song_info"] = "From: " . $song->album->artist->name . " - " . $song->album->name;
+	        $tmp["song_info"] = $song->album->artist->name . " - " . $song->album->name;
 	        if (ends_with( $song->file_name, 'mp3' )) {
 	        	$tmp["mp3"] = "{$musicUrlPre}/{$song->album->artist->name}/{$song->album->name}/{$song->file_name}";
 	        } else {
