@@ -15,9 +15,9 @@ do
 done
 
 echo "sending to remote ..."
-scp $FILE lusaisai@lusaisai.com:~/tmp
+scp $FILE im633.com:~/tmp
 
 echo "remote importing ..."
-ssh lusaisai@lusaisai.com "cd ~/tmp; mysql -u music -pmusic633 --database=music < `basename $FILE`"
+ssh im633.com "cd ~/tmp; mysql -u music -pmusic633 --database=music < `basename $FILE`"
 
 echo "done"

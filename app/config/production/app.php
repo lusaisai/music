@@ -26,6 +26,6 @@ return array(
 	|
 	*/
 
-	'url' => 'http://music.lusaisai.com',
+	'url' => 'http://music.im633.com',
 
 );

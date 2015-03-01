@@ -10,7 +10,7 @@ return array(
 	|
 	*/
 
-	'dir' => '/mnt/hgfs/Music',
+	'dir' => '/usr/share/nginx/html/resources/music',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://lusaisai.com/resources/music',
+	'url' => 'http://www.im633.com/resources/music',
 
 	/*
 	|--------------------------------------------------------------------------

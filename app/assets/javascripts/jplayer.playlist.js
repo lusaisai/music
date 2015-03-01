@@ -437,7 +437,7 @@
 					this.select(index);
 					clearTimeout(this.schedule);
 					// $(this.cssSelector.jPlayer).jPlayer("play");
-					this.schedule = setTimeout( function(){ reBufferPlay(3000); }, 1000 );;
+					this.schedule = setTimeout( function(){ reBufferPlay(3000); }, 3000 );;
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");
