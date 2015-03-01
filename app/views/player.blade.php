@@ -83,7 +83,7 @@
 			if (playlistName !== null && $.trim(playlistName) !== "" ) {
 				$.post( "/playlists", { name: playlistName, song_ids: gatherList() })
 				.done(function() {
-					bootbox.alert('<div class="alert alert-success">Playlist saved</div><p>Close this window in 2 seconds ...</p>');
+					bootbox.alert('<div class="alert alert-success">Playlist saved</div><p>This window will be closed in 2 seconds ...</p>');
 					setTimeout( bootbox.hideAll, 2000 );
 				})
 				.fail(function(data) {
