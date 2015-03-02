@@ -75,13 +75,17 @@
 
 (function() {
   var fetchData = function(user, time) {
-    $('#top-song-cloud').fadeOut();
+    
     $.ajax({
       dataType: "json",
       url: "/home/popularsongs/" + user + "/" + time,
       success: function( data, textStatus, jqXHR) {
-        setCloud(data);
-        $('#top-song-cloud').fadeIn();
+        $('#top-song-cloud').fadeOut( 'fast',
+          function(){
+            setCloud(data);
+            $('#top-song-cloud').fadeIn('fast');
+          }
+        );
       }
     });
   };
