@@ -28,9 +28,9 @@ $(document).ready(function(){
             }
 
             // when buffering speed is slow, need to consider to reconnect to source
-            if ( playtime > 10 && playtime < duration - 10 && buffertime - playtime < 2   ) {
+            /*if ( playtime > 10 && playtime < duration - 10 && buffertime - playtime < 2   ) {
                 waitingReload(event);
-            }
+            }*/
         } 
     };
 
@@ -138,7 +138,7 @@ $(document).ready(function(){
         $('#jquery_jplayer_1').jPlayer( 'play', parseFloat(time) );
     };
 
-    var waitingReloadScheduled = false;
+/*    var waitingReloadScheduled = false;
     var waitingReload = function (event) {
         if (waitingReloadScheduled) {return; }
         var playtime = event.jPlayer.status.currentTime;
@@ -159,7 +159,7 @@ $(document).ready(function(){
             waitingReloadScheduled = false;
         }, 3600 );
         
-    };
+    };*/
 
     myPlaylist = new jPlayerPlaylist(
             {
@@ -180,8 +180,8 @@ $(document).ready(function(){
                 },
                 ready: readyPlayStatus,
                 progress: buffer,
-                error: errorReplay,
-                stalled: waitingReload
+                error: errorReplay/*,
+                stalled: waitingReload*/
             }
     );
 

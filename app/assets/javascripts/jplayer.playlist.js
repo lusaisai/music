@@ -414,7 +414,7 @@
 					that.schedule = setTimeout( function(){ reBufferPlay(1.2*delay); }, 1.2*delay );
 				} else {
 					var buffertime = audio.buffered.end(audio.buffered.length-1);
-					if ( buffertime < 10 && audio.duration >= 10 ) {
+					if ( false && buffertime < 10 && audio.duration >= 10 ) { // adjust this line for different networks
 						that.select(index);
 						that.schedule = setTimeout( function(){ reBufferPlay(1.2*delay); }, 1.2*delay );
 					} else {
@@ -437,7 +437,7 @@
 					this.select(index);
 					clearTimeout(this.schedule);
 					// $(this.cssSelector.jPlayer).jPlayer("play");
-					this.schedule = setTimeout( function(){ reBufferPlay(3000); }, 3000 );;
+					this.schedule = setTimeout( function(){ reBufferPlay(2000); }, 2000 );;
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");
