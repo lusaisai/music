@@ -20,7 +20,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://www.im633.com/resources/music',
+	'url' => 'http://www.im633.com:8000/resources/music',
 
 	/*
 	|--------------------------------------------------------------------------
