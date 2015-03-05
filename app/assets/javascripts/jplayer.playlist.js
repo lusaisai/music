@@ -409,7 +409,7 @@
 
 			var reBufferPlay = function (delay) {
 				var audio = document.getElementById('jp_audio_0');
-				if ( !audio.buffered.length ) {
+				if ( false && !audio.buffered.length ) {
 					that.select(index);
 					that.schedule = setTimeout( function(){ reBufferPlay(1.2*delay); }, 1.2*delay );
 				} else {
