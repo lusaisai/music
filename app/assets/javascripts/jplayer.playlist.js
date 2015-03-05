@@ -404,40 +404,20 @@
 			}
 		},
 		play: function(index) {
-			var that = this;
 			var oldsongid = $('.jp-playlist-current').attr("songid");
-
-			var reBufferPlay = function (delay) {
-				var audio = document.getElementById('jp_audio_0');
-				if ( false && !audio.buffered.length ) {
-					that.select(index);
-					that.schedule = setTimeout( function(){ reBufferPlay(1.2*delay); }, 1.2*delay );
-				} else {
-					var buffertime = audio.buffered.end(audio.buffered.length-1);
-					if ( false && buffertime < 10 && audio.duration >= 10 ) { // adjust this line for different networks
-						that.select(index);
-						that.schedule = setTimeout( function(){ reBufferPlay(1.2*delay); }, 1.2*delay );
-					} else {
-						$(that.cssSelector.jPlayer).jPlayer("play");
-						// add for stats
-						var newsongid = $('.jp-playlist-current').attr("songid");
-						setTimeout( function() {
-							if( oldsongid != newsongid && newsongid == $('.jp-playlist-current').attr("songid") ) {
-								$.post('/utils/stats/' + newsongid);
-							}
-						}, 60 * 1000 );
-					}
-				}
-			};
-
 
 			index = (index < 0) ? this.original.length + index : index; // Negative index relates to end of array.
 			if(0 <= index && index < this.playlist.length) {
 				if(this.playlist.length) {
 					this.select(index);
-					clearTimeout(this.schedule);
-					// $(this.cssSelector.jPlayer).jPlayer("play");
-					this.schedule = setTimeout( function(){ reBufferPlay(2000); }, 2000 );;
+					$(this.cssSelector.jPlayer).jPlayer("play");
+					// add for stats
+					var newsongid = $('.jp-playlist-current').attr("songid");
+					setTimeout( function() {
+						if( oldsongid != newsongid && newsongid == $('.jp-playlist-current').attr("songid") ) {
+							$.post('/utils/stats/' + newsongid);
+						}
+					}, 60 * 1000 );
 				}
 			} else if(index === undefined) {
 				$(this.cssSelector.jPlayer).jPlayer("play");
