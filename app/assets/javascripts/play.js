@@ -98,8 +98,7 @@ $(document).ready(function(){
         if (playlist) {
             $.getJSON( '/utils/songmeta/' + playlist, function (data) {
                 play(data);
-                $(playerID).bind( $.jPlayer.event.play, storePlayStatus(1));
-                $(playerID).bind( $.jPlayer.event.pause, storePlayStatus(0));
+                if ( data.length === 0 ) { return; } // no meta data from server, the songs may be deleted
                 var index = localStorage.getItem('currentsong');
                 var time = localStorage.getItem('currenttime');
                 var isPlay = localStorage.getItem('isplay');
@@ -119,15 +118,16 @@ $(document).ready(function(){
                     });
                 };
                 
-                $(playerID).bind( $.jPlayer.event.timeupdate, doWhenTimeUpdates );
-                
-            } );
+            });
         } else {
-            play([]);
-            $(playerID).bind( $.jPlayer.event.play, storePlayStatus(1));
-            $(playerID).bind( $.jPlayer.event.pause, storePlayStatus(0));
-            $(playerID).bind( $.jPlayer.event.timeupdate, doWhenTimeUpdates );
+            play([]); 
         }
+
+        // event binding
+        $(playerID).bind( $.jPlayer.event.play, storePlayStatus(1));
+        $(playerID).bind( $.jPlayer.event.pause, storePlayStatus(0));
+        $(playerID).bind( $.jPlayer.event.timeupdate, doWhenTimeUpdates );
+
         window.mPlayList = myPlaylist; // exposed to window object for other javascripts to use
     };
 
