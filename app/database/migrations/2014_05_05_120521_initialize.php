@@ -87,8 +87,8 @@ class Initialize extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('artist_id');
-			$table->integer('album_id');
+			$table->integer('artist_id')->default(0);
+			$table->integer('album_id')->default(0);
 			$table->timestamps();
 			$table->index('artist_id');
 			$table->index('album_id');

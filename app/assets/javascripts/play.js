@@ -95,38 +95,49 @@ $(document).ready(function(){
     var readyPlayStatus = function () {
         var playerID = "#jquery_jplayer_1";
         var playlist = localStorage.getItem('playlist');
-        if (playlist) {
-            $.getJSON( '/utils/songmeta/' + playlist, function (data) {
-                play(data);
-                if ( data.length === 0 ) { return; } // no meta data from server, the songs may be deleted
-                var index = localStorage.getItem('currentsong');
-                var time = localStorage.getItem('currenttime');
-                var isPlay = localStorage.getItem('isplay');
-                var currentSongId = localStorage.getItem('currentsongid');
-                if ( typeof index != "undefined" ) { myPlaylist.select( parseInt(index) ) };
-                if ( typeof time != "undefined" ) {
-                    if ( isPlay == 1 ) {
-                        $(playerID).jPlayer( 'play', parseFloat(time) );
-                    } else {
-                        $(playerID).jPlayer( 'pause', parseFloat(time) );
-                    }
-                    
-                };
-                if (  typeof currentSongId != "undefined" ) {
-                    $.get('/utils/lyric/' + currentSongId, function(data) {
-                        lrc.setLrc(data);
-                    });
-                };
-                
-            });
-        } else {
-            play([]); 
-        }
 
         // event binding
-        $(playerID).bind( $.jPlayer.event.play, storePlayStatus(1));
-        $(playerID).bind( $.jPlayer.event.pause, storePlayStatus(0));
-        $(playerID).bind( $.jPlayer.event.timeupdate, doWhenTimeUpdates );
+        var playBinding = function () {
+            $(playerID).bind( $.jPlayer.event.play, storePlayStatus(1));
+            $(playerID).bind( $.jPlayer.event.pause, storePlayStatus(0));
+            $(playerID).bind( $.jPlayer.event.timeupdate, doWhenTimeUpdates );
+        };
+
+        var defaultPlay = function () {
+            play([]);
+            playBinding();
+        };
+
+        if (playlist) {
+            $.getJSON( '/utils/songmeta/' + playlist, function (data) {
+                if ( data.length === 0 ) {  
+                    defaultPlay(); // no meta data from server, the songs may be deleted
+                } else {
+                    play(data);
+                    var index = localStorage.getItem('currentsong');
+                    var time = localStorage.getItem('currenttime');
+                    var isPlay = localStorage.getItem('isplay');
+                    var currentSongId = localStorage.getItem('currentsongid');
+                    if ( typeof index != "undefined" ) { myPlaylist.select( parseInt(index) ) };
+                    if ( typeof time != "undefined" ) {
+                        if ( isPlay == 1 ) {
+                            $(playerID).jPlayer( 'play', parseFloat(time) );
+                        } else {
+                            $(playerID).jPlayer( 'pause', parseFloat(time) );
+                        }
+                        
+                    };
+                    if (  typeof currentSongId != "undefined" ) {
+                        $.get('/utils/lyric/' + currentSongId, function(data) {
+                            lrc.setLrc(data);
+                        });
+                    };
+                    playBinding();
+                }
+            });
+        } else {
+            defaultPlay();
+        }
 
         window.mPlayList = myPlaylist; // exposed to window object for other javascripts to use
     };
