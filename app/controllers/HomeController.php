@@ -46,7 +46,7 @@ class HomeController extends BaseController {
 
 		$ids  = [];
 		srand();
-		foreach (array_rand( $songs, $songCount ) as $choice) {
+		foreach (array_rand( $songs, min($songCount, count($songs)) ) as $choice) {
 			$ids[] = $songs[$choice]->id;
 		}
 
