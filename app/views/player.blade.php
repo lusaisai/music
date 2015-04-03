@@ -50,7 +50,20 @@
 		<a class="btn btn-default btn-sm {{{ Auth::check() ? '' : 'disabled' }}}" id="newplaylist" title="{{{ Auth::check() ? '' : 'login and' }}} save the current playlist"   >
 			<span class="glyphicon glyphicon-list"></span>
 		</a>
-		<script>$("#userpanel a").tooltip("hide");</script>
+		<div id="playlist-saving-box" class="input-group">
+		      <input type="text" id="playlist-saving-name" class="form-control" placeholder="playlist name">
+		      <span class="input-group-btn">
+		        <button id="playlist-saving-button" class="btn btn-default" type="button">save</button>
+		      </span>
+		</div>
+		<div id="userpanel-error" class="alert alert-danger" role="alert"></div>
+		<div id="userpanel-success" class="alert alert-success" role="alert"></div>
+		<script>
+			$("#userpanel a").tooltip("hide");
+			$("#playlist-saving-box").hide();
+			$("#userpanel-error").hide();
+			$("#userpanel-success").hide();
+		</script>
 	</div>
 	@if ( App::isLocal() )
 		<div id="inspector"></div>
@@ -65,7 +78,6 @@
 		</script>
 	@endif
 	
-
 	<div id="lyricer"></div>
 </div>
 <script type="text/javascript">
@@ -79,19 +91,34 @@
 	};
 
 	$('#newplaylist').click(function(event) {
-		bootbox.prompt("Please enter the playlist name", function(playlistName) {                
-			if (playlistName !== null && $.trim(playlistName) !== "" ) {
-				$.post( "/playlists", { name: playlistName, song_ids: gatherList() })
-				.done(function() {
-					bootbox.alert('<div class="alert alert-success">Playlist saved</div><p>This window will be closed in 2 seconds ...</p>');
-					setTimeout( bootbox.hideAll, 2000 );
-				})
-				.fail(function(data) {
-					bootbox.alert( '<div class="alert alert-danger">' + data.responseText + '</div>');
-				});
-			}
-		});
+		$("#playlist-saving-box").toggle();
 	});
+
+	var message_show_hide = function (result) {
+		var id = "#userpanel-" + result;	
+		$(id).fadeIn();
+		$(id).fadeOut(1500);
+	};
+
+	$('#playlist-saving-button').click(function() {
+		var playlistName = $('#playlist-saving-name').val();
+		if (playlistName !== null && $.trim(playlistName) !== "" ) {
+			$.post( "/playlists", { name: playlistName, song_ids: gatherList() })
+			.done(function() {
+				$("#userpanel-success").html('Playlist saved.');
+				message_show_hide('success');
+				$("#playlist-saving-box").toggle();
+			})
+			.fail(function(data) {
+				$("#userpanel-error").html(data.responseText);
+				message_show_hide('error');
+			});
+		} else {
+			$("#userpanel-error").html('playlist name cannot be empty');
+			message_show_hide('error');
+		}
+	});
+
 })();	
 
 </script>

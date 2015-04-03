@@ -53,26 +53,16 @@
     	  $(this).tab('show');
     	});
     	$('.playlist-delete').click(function () {
-    		var that = this;
-    		bootbox.confirm("Are you sure?", function(result) {
-    			if (result) {
-    				$.ajax({
-    						url: '/playlists/' + $(that).attr('playlist-id'),
-    						type: 'delete',
-    						success: function (data) {
-    							$.get( location, function( html ) {
-    								var result = $('<result>').append($.parseHTML(html, true));
-    								$('#main').html( result.find('#main').html() );
-    							});
-    						},
-    						fail: function (data) {
-    							bootbox.alert('deletion failed, please try later ');
-    						}
+    		$.ajax({
+    				url: '/playlists/' + $(this).attr('playlist-id'),
+    				type: 'delete',
+    				success: function (data) {
+    					$.get( location, function( html ) {
+    						var result = $('<result>').append($.parseHTML(html, true));
+    						$('#main').html( result.find('#main').html() );
     					});
-    			}
-    		}); 
+    				}
+    		});
     	});
-
-
     </script>
 @stop
