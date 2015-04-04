@@ -290,10 +290,15 @@ $(document).ready(function(){
         });
 
         $(window).scroll(function() {
-            if ( $(window).scrollTop() >= playerY && $(window).height() > $("#the_player").height() ) {
-                $("#the_player").css({ "position": "fixed", "top": "0px" });
+            var jplayer = $("#the_player");
+            if ( $(window).scrollTop() >= playerY && $(window).height() > jplayer.height() ) {
+                if (jplayer.css('position') !== 'fixed') {
+                    jplayer.css({ "position": "fixed", "top": "0px" });
+                }
             } else {
-                $("#the_player").css({ "position": "relative" });
+                if (jplayer.css('position') !== 'relative') {
+                    jplayer.css({ "position": "relative" });
+                }
             }
         });
 
