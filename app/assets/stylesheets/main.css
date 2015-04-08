@@ -75,3 +75,7 @@ svg text:hover {
         width: auto !important;
     }
 }
+
+#the_player {
+  max-width: 224px;
+}
