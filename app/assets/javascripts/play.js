@@ -290,8 +290,12 @@ $(document).ready(function(){
         });
 
         $(window).scroll(function() {
+            if ($('.container').width() <= 750) {return;} // for small screen, do not replace player
+
             var jplayer = $("#the_player");
-            if ( $(window).scrollTop() >= playerY && $(window).height() > jplayer.height() ) {
+            var jwindow = $(window);
+
+            if ( jwindow.scrollTop() >= playerY && jwindow.height() > jplayer.height() ) {
                 if (jplayer.css('position') !== 'fixed') {
                     jplayer.css({ "position": "fixed", "top": "0px" });
                 }
