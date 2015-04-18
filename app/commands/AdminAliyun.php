@@ -56,10 +56,12 @@ class AdminAliyun extends Command {
             'AccessKeyId' => Config::get('aliyun.AccessKeyId'),
             'AccessKeySecret' => Config::get('aliyun.AccessKeySecret'),
             'Endpoint' => 'http://oss-cn-shenzhen.aliyuncs.com/',
+            
         ));
 
         $objectListing = $client->listObjects(array(
             'Bucket' => 'im633-resources',
+            'MaxKeys' => 1000,
         ));
 
         foreach ($objectListing->getObjectSummarys() as $objectSummary) {

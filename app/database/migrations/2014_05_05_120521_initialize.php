@@ -100,7 +100,7 @@ class Initialize extends Migration {
 			$table->string('username');
 			$table->string('password');
 			$table->string('email');
-			$table->string('remember_token'->nullable());
+			$table->string('remember_token')->nullable();
 			$table->timestamps();
 		});
 
