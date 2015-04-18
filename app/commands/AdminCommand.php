@@ -1,8 +1,13 @@
 <?php
 
+require 'aliyun-php-sdk/aliyun.php';
+
+use \Aliyun\OSS\OSSClient;
+
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+
 
 class AdminCommand extends Command {
 
@@ -37,7 +42,7 @@ class AdminCommand extends Command {
 	 */
 	public function fire()
 	{
-		$value = $this->option('full-refresh');
+        $value = $this->option('full-refresh');
         if ($value) {
             $this->update(true);
         } else {
@@ -45,6 +50,7 @@ class AdminCommand extends Command {
         }
         
 	}
+
 
 	/**
 	 * Go thru the file system and update the database 
@@ -134,7 +140,7 @@ class AdminCommand extends Command {
     	DB::commit();
 	}
 
-	private static function toPinyin($word='')
+	public static function toPinyin($word='')
     {
         $pinyin = [ '' ];
 
@@ -183,7 +189,7 @@ class AdminCommand extends Command {
         return preg_split('/(?<!^)(?!$)/u', $word );
     }
 
-    private static function songClean($value)
+    public static function songClean($value)
     {
         $value = trim( preg_replace('/\.[^.]*$/', '', $value) ); // remove file extension
         $value = trim( preg_replace('/^.*-/', '', $value) );
