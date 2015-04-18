@@ -46,6 +46,7 @@ class AdminAliyun extends Command {
         } else {
             $this->aliyunUpdates();
         }
+        $this->cleanUp();
 	}
 
     private function listAliyunFiles()
@@ -120,14 +121,14 @@ class AdminAliyun extends Command {
                 $artist = Artist::firstOrNew( [ 'name' => $split[0] ] );
                 $album = Album::firstOrNew( [ 'name' => $split[1], 'artist_id' => $artist->id ] );
 
-                if (ends_with($split[2], '.jpg')) {
+                if (AdminCommand::isImage($split[2])) {
                     $albumImage = $split[2];
                     $image = Image::firstOrNew( [ 'name' => $albumImage, 'album_id' => $album->id ] );
                     if ( !$image->exists || $fullRefresh ) {
                         $image->save();
                         $this->info('Updated ' . $albumImage);
                     }
-                } else {
+                } else if (AdminCommand::isSong($split[2])) {
                     $songName = $split[2];
                     $song = Song::firstOrNew( [ 'file_name' => $songName, 'album_id' => $album->id ] );
                     if ( !$song->exists || $fullRefresh ) {
@@ -142,6 +143,73 @@ class AdminAliyun extends Command {
             }
         }
     }
+
+	private function cleanUp()
+	{
+		$this->comment('cleaning up ...');
+		$files = $this->listAliyunFiles();
+		$artists = Artist::all();
+		foreach ($artists as $artist) {
+			if ( ! in_array($artist->name.'/', $files) ) {
+				// clean his/her albums
+				$this->cleanAlbums($artist->albums);
+
+				// clean his/her images
+				foreach ($artist->images as $image) {
+					$this->info('cleaning up ' . $image->name);
+					$image->delete();
+				}
+
+				// clean artist
+				$this->info('cleaning up ' . $artist->name);
+				$artist->delete();
+			} else {
+				foreach ($artist->albums as $album) {
+					if (! in_array($artist->name . '/' . $album->name.'/', $files)) {
+						$this->cleanAlbums(array($album));
+					} else {
+						foreach ($album->songs as $song) {
+							if (! in_array($artist->name . '/' . $album->name .'/'.$song->filename , $files) ) {
+								$this->info('cleaning up ' . $song->filename);
+								$song->delete();
+							}
+						}
+						foreach ($album->images as $image) {
+							if ( ! in_array($artist->name . '/' . $album->name .'/'.$image->name , $files) ) {
+								$this->info('cleaning up ' . $image->name);
+								$image->delete();
+							}
+						}
+					}
+				}
+
+				foreach ($artist->images as $image) {
+					if ( ! in_array($artist->name.'/'.$image->name , $files) ) {
+						$this->info('cleaning up ' . $image->name);
+						$image->delete();
+					}
+				}
+			}
+		}
+	}
+
+	private function cleanAlbums($albums)
+	{
+		foreach ($albums as $album) {
+			// clean album's songs/images
+			foreach ($album->songs as $song) {
+				$this->info('cleaning up ' . $song->name);
+				$song->delete();
+			}
+			foreach ($album->images as $image) {
+				$this->info('cleaning up ' . $image->name);
+				$image->delete();
+			}
+			$this->info('cleaning up ' . $album->name);
+			$album->delete();
+		}
+	}
+
 
 	/**
 	 * Get the console command options.

@@ -203,12 +203,12 @@ class AdminCommand extends Command {
         return $value;
     }
 
-	private static function isImage($name)
+	public static function isImage($name)
 	{
 		return $name != "AlbumArtSmall.jpg" && $name != "Folder.jpg" && preg_match('/(jpg|jpeg|png)$/', $name); // tmp solution to skip winodws thumbnail
 	}
 
-	private static function isSong($name)
+	public static function isSong($name)
 	{
 		return preg_match('/(mp3|m4a)$/i', $name);
 	}
