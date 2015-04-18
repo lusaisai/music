@@ -17,7 +17,7 @@ $(function () {
 		'<div id="ajaxized-progress" style="width:0%;height:100%;background-color:lightgreen;""></div>' +
 		'</div>';
 		$("body").prepend(div);
-		$('#ajaxized-progress').animate({width: '99%'}, 1000);
+		$('#ajaxized-progress').animate({width: '99%'}, 2000);
 	};
 	
 
