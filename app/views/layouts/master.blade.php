@@ -9,8 +9,17 @@
     
 	<title>{{{ Poem::orderBy(DB::raw('rand()'))->pluck('content') }}}</title>
 
+	<link rel="stylesheet" href="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/stylesheets/jquery-ui.min.css">
+	<link rel="stylesheet" href="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/stylesheets/bootstrap.min.css">
 	<?= stylesheet_link_tag() ?>
 
+	<script src="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/javascripts/jquery-1.11.2.min.js"></script>
+	<script src="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/javascripts/jquery-ui.min.js"></script>
+	<script src="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/javascripts/jquery.jplayer.js"></script>
+	<script src="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/javascripts/jquery.jplayer.inspector.js"></script>
+	<script src="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/javascripts/bootstrap.min.js"></script>
+	<script src="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/javascripts/d3.js"></script>
+	<script src="http://im633-resources.oss-cn-shenzhen.aliyuncs.com/assets/javascripts/d3.layout.cloud.js"></script>
 	<?= javascript_include_tag() ?>
 </head>
 <body>
