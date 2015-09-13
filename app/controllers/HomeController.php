@@ -59,13 +59,13 @@ class HomeController extends BaseController {
 
 	public function popularSongs( $user = "all", $time = "all")
 	{
-		// if ($user == "user" && Session::get( "isLogin", false ) ) {
-		// 	$userid = Session::get( "userid", 0 );
-		// } else {
-		// 	$userid = 0;
-		// }
+		if ($user == "user" && Auth::check() ) {
+                        $userid = Auth::id();
+                 } else {
+                        $userid = 0;
+                 }
 
-		return Response::json($this->topSongs( 0, $time ));
+                return Response::json($this->topSongs( $userid, $time ));
 
 	}
 
